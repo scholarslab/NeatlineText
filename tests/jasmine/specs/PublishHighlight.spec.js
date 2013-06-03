@@ -12,8 +12,8 @@ describe('Publish `highlight`', function() {
 
 
   var span, fx = {
-    slug2: readFixtures('PublishHighlight.slug2.json'),
-    noSlug2: readFixtures('PublishHighlight.noSlug2.json')
+    slug2: readFixtures('Publications.slug2.json'),
+    noSlug2: readFixtures('Publications.noSlug2.json')
   };
 
 
@@ -27,8 +27,8 @@ describe('Publish `highlight`', function() {
 
     // --------------------------------------------------------------------
     // When the cursor hovers over an element with a `data-neatline-slug`
-    // attribute and there is a model in the map collection with a slug
-    // that matches the attribute value, the `highlight` event should be
+    // attribute and a model exists in the map collection with a slug that
+    // matches the attribute value, the `highlight` event should be
     // published with the record model.
     // --------------------------------------------------------------------
 

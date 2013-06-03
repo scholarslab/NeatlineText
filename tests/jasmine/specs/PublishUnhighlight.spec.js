@@ -11,15 +11,54 @@
 describe('Publish `unhighlight`', function() {
 
 
+  var span, fx = {
+    slug2: readFixtures('Publications.slug2.json'),
+    noSlug2: readFixtures('Publications.noSlug2.json')
+  };
+
+
   beforeEach(function() {
     NARRATIVE.loadNeatline();
+    span = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
   });
 
 
-  it('should publish when span has map layer');
+  it('should publish when span has map layer', function() {
+
+    // --------------------------------------------------------------------
+    // When the cursor leaves an element with a `data-neatline-slug`
+    // attribute and a model exists in the map collection with a slug that
+    // matches the attribute value, the `unhighlight` event should be
+    // published with the record model.
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.slug2);
+    var vent = spyOn(Neatline.vent, 'trigger');
+    span.trigger('mouseleave');
+
+    expect(vent).toHaveBeenCalledWith('unhighlight', {
+      model:  NARRATIVE.getMapRecordBySlug('slug-2'),
+      source: Neatline.Narrative.ID
+    });
+
+  });
 
 
-  it('should not publish when span does not have map layer');
+  it('should not publish when span does not have map layer', function() {
+
+    // --------------------------------------------------------------------
+    // When the map collection does not contain a model with a slug that
+    // matches the value of the attribute, `unhighlight` should be _not_
+    // be published, since we don't have a model to work with.
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.noSlug2);
+    var vent = spyOn(Neatline.vent, 'trigger');
+    span.trigger('mouseleave');
+
+    expect(vent).not.toHaveBeenCalled();
+
+  });
 
 
 });

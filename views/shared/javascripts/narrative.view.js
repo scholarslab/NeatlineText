@@ -44,7 +44,11 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onUnhighlight: function(e) {
-      console.log('unhighlight', e);
+      var model = this.getMapRecordFromEvent(e)
+      if (model) Neatline.vent.trigger('unhighlight', {
+        source: Narrative.ID,
+        model:  model
+      });
     },
 
 

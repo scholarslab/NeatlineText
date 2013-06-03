@@ -14,8 +14,8 @@ class FixturesTest_JSON extends NeatlineNarrative_Case_Fixture
 
 
     /**
-     * `PublishHighlight.slug2.json`
-     * `PublishHighlight.noSlug2.json`
+     * `Publications.slug2.json`
+     * `Publications.noSlug2.json`
      */
     public function testRecords()
     {
@@ -30,13 +30,13 @@ class FixturesTest_JSON extends NeatlineNarrative_Case_Fixture
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublishHighlight.slug2.json'
+            'Publications.slug2.json'
         );
 
         $record2->delete();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublishHighlight.noSlug2.json'
+            'Publications.noSlug2.json'
         );
 
     }
