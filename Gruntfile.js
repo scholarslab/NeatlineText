@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 
     concat: {
       narrative: {
-        src: paths.src.shared+'/public/*.js',
+        src: paths.src.shared+'/*.js',
         dest: paths.payloads.shared.js+'/narrative-public.js'
       }
     },
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
       compile: {
         files: {
           './views/shared/css/payloads/narrative-public.css':
-            paths.stylus.shared+'/public/*.styl'
+            paths.stylus.shared+'/*.styl'
         }
       }
     },
