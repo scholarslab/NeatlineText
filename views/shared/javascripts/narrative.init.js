@@ -16,7 +16,8 @@ Neatline.module('Narrative', function(
 
 
   Narrative.addInitializer(function() {
-    // TODO
+    Narrative.__collection = new Neatline.Shared.Record.Collection();
+    Narrative.__view = new Narrative.View();
   });
 
 
