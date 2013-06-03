@@ -36,7 +36,8 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookNeatlinePublicStatic($args)
     {
         if ($args['exhibit']->hasWidget(self::ID)) {
-            // TODO
+            queue_css_file('payloads/narrative-public');
+            queue_js_file('payloads/narrative-public');
         }
     }
 
