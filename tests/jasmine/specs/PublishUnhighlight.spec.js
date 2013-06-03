@@ -17,6 +17,8 @@ describe('Publish `unhighlight`', function() {
 
 
   it('should publish when span has map layer');
+
+
   it('should not publish when span does not have map layer');
 
 

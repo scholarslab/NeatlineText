@@ -11,13 +11,54 @@
 describe('Publish `highlight`', function() {
 
 
+  var span, fx = {
+    slug2: readFixtures('PublishHighlight.slug2.json'),
+    noSlug2: readFixtures('PublishHighlight.noSlug2.json')
+  };
+
+
   beforeEach(function() {
     NARRATIVE.loadNeatline();
+    span = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
   });
 
 
-  it('should publish when span has map layer');
-  it('should not publish when span does not have map layer');
+  it('should publish when span has map layer', function() {
+
+    // --------------------------------------------------------------------
+    // When the cursor hovers over an element with a `data-neatline-slug`
+    // attribute and there is a model in the map collection with a slug
+    // that matches the attribute value, the `highlight` event should be
+    // published with the record model.
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.slug2);
+    var vent = spyOn(Neatline.vent, 'trigger');
+    span.trigger('mouseenter');
+
+    expect(vent).toHaveBeenCalledWith('highlight', {
+      model:  NARRATIVE.getMapRecordBySlug('slug-2'),
+      source: Neatline.Narrative.ID
+    });
+
+  });
+
+
+  it('should not publish when span does not have map layer', function() {
+
+    // --------------------------------------------------------------------
+    // When the map collection does not contain a model with a slug that
+    // matches the value of the attribute, `highlight` should be _not_ be
+    // published, since we don't have a model to work with.
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.noSlug2);
+    var vent = spyOn(Neatline.vent, 'trigger');
+    span.trigger('mouseenter');
+
+    expect(vent).not.toHaveBeenCalled();
+
+  });
 
 
 });

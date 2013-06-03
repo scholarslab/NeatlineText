@@ -30,7 +30,11 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onHighlight: function(e) {
-      console.log('highlight', e);
+      var model = this.getMapRecordFromEvent(e)
+      if (model) Neatline.vent.trigger('highlight', {
+        source: Narrative.ID,
+        model:  model
+      });
     },
 
 
@@ -51,6 +55,32 @@ Neatline.module('Narrative', function(
      */
     onSelect: function(e) {
       console.log('select', e);
+    },
+
+
+    /**
+     * Get the slug associated with a DOM event.
+     *
+     * @param {Object} e: The DOM event.
+     * @return {String}: The target element's slug.
+     */
+    getSlugFromEvent: function(e) {
+      return $(e.currentTarget).attr('data-neatline-slug');
+    },
+
+
+    /**
+     * Try to get a record from the map collection with a slug that
+     * matches the value of the `data-neatline-slug` attribute on the
+     * element associated with the passed event.
+     *
+     * @param {Object} e: The DOM event.
+     * @return {String}: The target element's slug.
+     */
+    getMapRecordFromEvent: function(e) {
+      return Neatline.request('MAP:getRecords').findWhere({
+        slug: this.getSlugFromEvent(e)
+      });
     }
 
 

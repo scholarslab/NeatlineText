@@ -152,6 +152,9 @@ module.exports = function(grunt) {
     'jasmine'
   ]);
 
+  // Run PHPUnit.
+  grunt.registerTask('phpunit', 'shell:phpunit');
+
   // Mount Jasmine suite.
   grunt.registerTask('jasmine:server', [
     'jasmine:neatline:build',

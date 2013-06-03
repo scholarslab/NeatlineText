@@ -17,6 +17,8 @@ describe('Publish `select`', function() {
 
 
   it('should not load record when span has map layer');
+
+
   it('should load record when span does not have map layer');
 
 
