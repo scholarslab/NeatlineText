@@ -18,14 +18,14 @@ Neatline.module('Narrative', function(
     el: '#neatline-narrative',
 
     events: {
-      'mouseenter [data-neatline-slug]': 'onHighlight',
-      'mouseleave [data-neatline-slug]': 'onUnhighlight',
-      'click [data-neatline-slug]': 'onSelect'
+      'mouseenter [data-neatline-slug]':  'onHighlight',
+      'mouseleave [data-neatline-slug]':  'onUnhighlight',
+      'click [data-neatline-slug]':       'onSelect'
     },
 
 
     /**
-     * Trigger `highlight` on span mouseenter.
+     * Publish `highlight` when the cursor enters a span.
      *
      * @param {Object} e: The DOM event.
      */
@@ -35,7 +35,7 @@ Neatline.module('Narrative', function(
 
 
     /**
-     * Trigger `unhighlight` on span mouseleave.
+     * Publish `unhighlight` when the cursor leaves a span.
      *
      * @param {Object} e: The DOM event.
      */
@@ -45,7 +45,7 @@ Neatline.module('Narrative', function(
 
 
     /**
-     * Trigger `select` on span click.
+     * Publish `select` when a span is clicked.
      *
      * @param {Object} e: The DOM event.
      */

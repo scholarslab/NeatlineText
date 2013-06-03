@@ -90,17 +90,18 @@ module.exports = function(grunt) {
           './Neatline/'+nlPaths.vendor.js.jasmine_jquery,
           './Neatline/'+nlPaths.vendor.js.sinon,
           './Neatline/'+nlPaths.jasmine+'/helpers/*.js',
-          './Neatline/'+nlPaths.jasmine+'/assertions/*.js'
+          './Neatline/'+nlPaths.jasmine+'/assertions/*.js',
+          paths.jasmine+'/helpers/*.js'
         ]
       },
 
       neatline: {
         src: [
           './Neatline/'+nlPaths.payloads.shared.js+'/neatline-public.js',
-          paths.payloads.shared.js+'/narrative.js'
+          paths.payloads.shared.js+'/narrative-public.js'
         ],
         options: {
-          specs: paths.jasmine+'/specs/public/**/*.spec.js'
+          specs: paths.jasmine+'/specs/**/*.spec.js'
         }
       }
 
