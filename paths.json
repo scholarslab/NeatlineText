@@ -1,0 +1,20 @@
+{
+
+  "src": {
+    "shared": "./views/shared/javascripts"
+  },
+
+  "stylus": {
+    "shared": "./views/shared/css/stylus"
+  },
+
+  "payloads": {
+    "shared": {
+      "js":   "./views/shared/javascripts/payloads",
+      "css":  "./views/shared/css/payloads"
+    }
+  },
+
+  "jasmine":  "./tests/jasmine"
+
+}
