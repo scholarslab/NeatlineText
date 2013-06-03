@@ -31,10 +31,7 @@ Neatline.module('Narrative', function(
      */
     onHighlight: function(e) {
       var model = this.getMapRecordFromEvent(e)
-      if (model) Neatline.vent.trigger('highlight', {
-        source: Narrative.ID,
-        model:  model
-      });
+      if (model) this.publish('highlight', model);
     },
 
 
@@ -45,10 +42,7 @@ Neatline.module('Narrative', function(
      */
     onUnhighlight: function(e) {
       var model = this.getMapRecordFromEvent(e)
-      if (model) Neatline.vent.trigger('unhighlight', {
-        source: Narrative.ID,
-        model:  model
-      });
+      if (model) this.publish('unhighlight', model);
     },
 
 
@@ -58,7 +52,35 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onSelect: function(e) {
-      console.log('select', e);
+
+      // Try to publish existing model.
+      var model = this.getMapRecordFromEvent(e)
+      if (model) this.publish('select', model);
+
+      else {
+
+        var params = { slug: this.getSlugFromEvent(e) };
+
+        // Otherwise, load from the server.
+        Narrative.__collection.update(params, _.bind(function(records) {
+          this.publish('select', records.first());
+        }, this));
+
+      }
+
+    },
+
+
+    /**
+     * Publish an event with a model.
+     *
+     * @param {String} event: An event name.
+     * @param {Object} model: A record model.
+     */
+    publish: function(event, model) {
+      Neatline.vent.trigger(event, {
+        source: Narrative.ID, model: model
+      });
     },
 
 

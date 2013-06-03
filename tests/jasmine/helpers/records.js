@@ -22,6 +22,16 @@ var NARRATIVE = (function(NARRATIVE) {
   };
 
 
+  /**
+   * Get a narrative collection model by slug.
+   *
+   * @param {String} slug: A record slug.
+   */
+  NARRATIVE.getNarrativeRecordBySlug = function(slug) {
+    return Neatline.Narrative.__collection.findWhere({ slug: slug });
+  };
+
+
   return NARRATIVE;
 
 

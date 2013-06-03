@@ -12,8 +12,8 @@ describe('Publish `unhighlight`', function() {
 
 
   var span, fx = {
-    slug2: readFixtures('Publications.slug2.json'),
-    noSlug2: readFixtures('Publications.noSlug2.json')
+    s1:   readFixtures('records.s1.json'),
+    s12:  readFixtures('records.s12.json')
   };
 
 
@@ -23,19 +23,21 @@ describe('Publish `unhighlight`', function() {
   });
 
 
-  it('should publish when span has map layer', function() {
+  it('should publish map model when one exists', function() {
 
     // --------------------------------------------------------------------
-    // When the cursor leaves an element with a `data-neatline-slug`
-    // attribute and a model exists in the map collection with a slug that
-    // matches the attribute value, the `unhighlight` event should be
-    // published with the record model.
+    // When the cursor leaves a tagged element and a corresponding model
+    // exists in the map collection, `unhighlight` should be published
+    // with with the model from the map.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.slug2);
+    NL.respondMap200(fx.s12);
     var vent = spyOn(Neatline.vent, 'trigger');
+
+    // Unhover on `slug-2`
     span.trigger('mouseleave');
 
+    // Should publish `unhighlight`.
     expect(vent).toHaveBeenCalledWith('unhighlight', {
       model:  NARRATIVE.getMapRecordBySlug('slug-2'),
       source: Neatline.Narrative.ID
@@ -44,18 +46,20 @@ describe('Publish `unhighlight`', function() {
   });
 
 
-  it('should not publish when span does not have map layer', function() {
+  it('should not publish when map does not have model', function() {
 
     // --------------------------------------------------------------------
-    // When the map collection does not contain a model with a slug that
-    // matches the value of the attribute, `unhighlight` should be _not_
-    // be published, since we don't have a model to work with.
+    // When the map collection does not contain a corresponding model,
+    // `highlight` should _not_ be published.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.noSlug2);
+    NL.respondMap200(fx.s1);
     var vent = spyOn(Neatline.vent, 'trigger');
+
+    // Unhover on `slug-2`.
     span.trigger('mouseleave');
 
+    // Should not publish.
     expect(vent).not.toHaveBeenCalled();
 
   });
