@@ -18,11 +18,26 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-symbolic-link');
+  grunt.loadNpmTasks('grunt-shell');
 
   var nlPaths = grunt.file.readJSON('../Neatline/paths.json');
   var paths = grunt.file.readJSON('./paths.json');
 
   grunt.initConfig({
+
+    shell: {
+      options: {
+        stdout: true
+      },
+      phpunit: {
+        command: 'phpunit --color',
+        options: {
+          execOptions: {
+            cwd: './tests/phpunit'
+          }
+        }
+      }
+    },
 
     symlink: {
       neatline: {
@@ -133,6 +148,7 @@ module.exports = function(grunt) {
 
   // Run all tests.
   grunt.registerTask('test', [
+    'shell:phpunit',
     'jasmine'
   ]);
 

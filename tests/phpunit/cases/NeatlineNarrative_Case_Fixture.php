@@ -11,7 +11,7 @@
 
 
 class NeatlineNarrative_Case_Fixture
-    extends NeatlineWaypoints_Case_Default
+    extends NeatlineNarrative_Case_Default
 {
 
 

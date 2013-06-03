@@ -3,7 +3,6 @@
          convertWarningsToExceptions="true"
          verbose="true">
     <testsuite name="Neatline Narrative Tests">
-        <directory>integration</directory>
         <directory>fixtures</directory>
     </testsuite>
 </phpunit>
