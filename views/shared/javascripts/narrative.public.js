@@ -44,6 +44,7 @@ Neatline.module('Narrative', function(
    */
   var select = function(args) {
     Narrative.__view.select(args.model);
+    unhighlight(args);
   };
   Neatline.commands.setHandler(Narrative.ID+':select', select);
   Neatline.vent.on('select', select);

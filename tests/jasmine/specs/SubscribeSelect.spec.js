@@ -31,7 +31,7 @@ describe('Subscribe `select`', function() {
 
     // --------------------------------------------------------------------
     // When `select` is triggered, the `selected` class should be added to
-    // the corresponding element in the text.
+    // the corresponding elements in the text.
     // --------------------------------------------------------------------
 
     var model = NARRATIVE.getMapRecordBySlug('slug-1');
@@ -39,6 +39,23 @@ describe('Subscribe `select`', function() {
 
     expect(span1).toHaveClass('selected');
     expect(span2).not.toHaveClass('selected');
+
+  });
+
+
+  it('should remove `highlighted` class', function() {
+
+    // --------------------------------------------------------------------
+    // When `select` is triggered, corresponding elements in the text
+    // should be unhighlighted, which prevents the `highlight` class from
+    // getting stuck on the element when the reocrd is unselected.
+    // --------------------------------------------------------------------
+
+    var model = NARRATIVE.getMapRecordBySlug('slug-1');
+    Neatline.vent.trigger('highlight', { model: model });
+    Neatline.vent.trigger('select', { model: model });
+
+    expect(span1).not.toHaveClass('highlighted');
 
   });
 
