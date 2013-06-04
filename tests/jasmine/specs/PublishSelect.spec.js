@@ -20,7 +20,7 @@ describe('Publish `select`', function() {
 
   beforeEach(function() {
     NARRATIVE.loadNeatline();
-    span = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
+    span = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
   });
 
 
@@ -35,7 +35,7 @@ describe('Publish `select`', function() {
     NL.respondMap200(fx.s12);
     var vent = spyOn(Neatline.vent, 'trigger');
 
-    // Click on `slug-2`
+    // Click on `slug-1`
     var c1 = NL.server.requests.length;
     span.trigger('click');
     var c2 = NL.server.requests.length;
@@ -45,7 +45,7 @@ describe('Publish `select`', function() {
 
     // Should publish `select`.
     expect(vent).toHaveBeenCalledWith('select', {
-      model:  NARRATIVE.getMapRecordBySlug('slug-2'),
+      model:  NARRATIVE.getMapRecordBySlug('slug-1'),
       source: Neatline.Narrative.ID
     });
 
@@ -59,10 +59,10 @@ describe('Publish `select`', function() {
     // fresh model should be loaded from the server.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.s1);
+    NL.respondMap200(fx.s2);
     var vent = spyOn(Neatline.vent, 'trigger');
 
-    // Click on `slug-2`
+    // Click on `slug-1`
     var c1 = NL.server.requests.length;
     span.trigger('click');
     var c2 = NL.server.requests.length;
@@ -70,12 +70,12 @@ describe('Publish `select`', function() {
     // Should load new model.
     expect(c2).toEqual(c1+1);
 
-    // Respond with `slug-2` model.
-    NL.respondLast200(fx.s2);
+    // Respond with `slug-1` model.
+    NL.respondLast200(fx.s1);
 
     // Should publish `select`.
     expect(vent).toHaveBeenCalledWith('select', {
-      model:  NARRATIVE.getNarrativeRecordBySlug('slug-2'),
+      model:  NARRATIVE.getNarrativeRecordBySlug('slug-1'),
       source: Neatline.Narrative.ID
     });
 

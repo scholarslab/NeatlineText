@@ -19,7 +19,7 @@ describe('Publish `highlight`', function() {
 
   beforeEach(function() {
     NARRATIVE.loadNeatline();
-    span = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
+    span = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
   });
 
 
@@ -34,12 +34,12 @@ describe('Publish `highlight`', function() {
     NL.respondMap200(fx.s12);
     var vent = spyOn(Neatline.vent, 'trigger');
 
-    // Hover on `slug-2`
+    // Hover on `slug-1`
     span.trigger('mouseenter');
 
     // Should publish `highlight`.
     expect(vent).toHaveBeenCalledWith('highlight', {
-      model:  NARRATIVE.getMapRecordBySlug('slug-2'),
+      model:  NARRATIVE.getMapRecordBySlug('slug-1'),
       source: Neatline.Narrative.ID
     });
 
@@ -53,10 +53,10 @@ describe('Publish `highlight`', function() {
     // `highlight` should _not_ be published.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.s1);
+    NL.respondMap200(fx.s2);
     var vent = spyOn(Neatline.vent, 'trigger');
 
-    // Hover on `slug-2`.
+    // Hover on `slug-1`.
     span.trigger('mouseenter');
 
     // Should not publish.

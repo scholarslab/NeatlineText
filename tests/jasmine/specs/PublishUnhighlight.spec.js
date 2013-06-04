@@ -19,7 +19,7 @@ describe('Publish `unhighlight`', function() {
 
   beforeEach(function() {
     NARRATIVE.loadNeatline();
-    span = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
+    span = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
   });
 
 
@@ -34,12 +34,12 @@ describe('Publish `unhighlight`', function() {
     NL.respondMap200(fx.s12);
     var vent = spyOn(Neatline.vent, 'trigger');
 
-    // Unhover on `slug-2`
+    // Unhover on `slug-1`
     span.trigger('mouseleave');
 
     // Should publish `unhighlight`.
     expect(vent).toHaveBeenCalledWith('unhighlight', {
-      model:  NARRATIVE.getMapRecordBySlug('slug-2'),
+      model:  NARRATIVE.getMapRecordBySlug('slug-1'),
       source: Neatline.Narrative.ID
     });
 
@@ -53,10 +53,10 @@ describe('Publish `unhighlight`', function() {
     // `highlight` should _not_ be published.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.s1);
+    NL.respondMap200(fx.s2);
     var vent = spyOn(Neatline.vent, 'trigger');
 
-    // Unhover on `slug-2`.
+    // Unhover on `slug-1`.
     span.trigger('mouseleave');
 
     // Should not publish.

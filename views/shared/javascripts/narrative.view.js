@@ -25,6 +25,46 @@ Neatline.module('Narrative', function(
 
 
     /**
+     * Add `highlighted` class to elements tagged with a model's slug.
+     *
+     * @param {Object} model: The record model.
+     */
+    highlight: function(model) {
+      this.getElementsFromSlug(model.get('slug')).addClass('highlighted');
+    },
+
+
+    /**
+     * Remove `highlighted` class to elements tagged with a model's slug.
+     *
+     * @param {Object} model: The record model.
+     */
+    unhighlight: function(model) {
+      // TODO
+    },
+
+
+    /**
+     * Add `selected` class to elements tagged with a model's slug.
+     *
+     * @param {Object} model: The record model.
+     */
+    select: function(model) {
+      // TODO
+    },
+
+
+    /**
+     * Remove `selected` class to elements tagged with a model's slug.
+     *
+     * @param {Object} model: The record model.
+     */
+    unselect: function(model) {
+      // TODO
+    },
+
+
+    /**
      * Publish `highlight` when the cursor enters a span.
      *
      * @param {Object} e: The DOM event.
@@ -72,15 +112,13 @@ Neatline.module('Narrative', function(
 
 
     /**
-     * Publish an event with a model.
+     * Query for elements tagged with a slug.
      *
-     * @param {String} event: An event name.
-     * @param {Object} model: A record model.
+     * @param {String} slug: A record slug.
+     * @return {Object}: The DOM selection.
      */
-    publish: function(event, model) {
-      Neatline.vent.trigger(event, {
-        source: Narrative.ID, model: model
-      });
+    getElementsFromSlug: function(slug) {
+      return this.$('[data-neatline-slug="'+slug+'"]');
     },
 
 
@@ -106,6 +144,19 @@ Neatline.module('Narrative', function(
     getMapRecordFromEvent: function(e) {
       return Neatline.request('MAP:getRecords').findWhere({
         slug: this.getSlugFromEvent(e)
+      });
+    },
+
+
+    /**
+     * Publish an event with a model.
+     *
+     * @param {String} event: An event name.
+     * @param {Object} model: A record model.
+     */
+    publish: function(event, model) {
+      Neatline.vent.trigger(event, {
+        source: Narrative.ID, model: model
       });
     }
 
