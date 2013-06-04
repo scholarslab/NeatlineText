@@ -16,7 +16,7 @@ var NARRATIVE = (function(NARRATIVE) {
    * Load neatline application.
    */
   NARRATIVE.loadNeatline = function() {
-    loadFixtures('neatline-partial.html');
+    loadFixtures('exhibit.html');
     NL.__initNeatline();
   };
 

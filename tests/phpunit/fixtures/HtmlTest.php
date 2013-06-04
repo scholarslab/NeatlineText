@@ -34,8 +34,7 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         // Mock narrative.
         $exhibit->narrative = "
           <span data-neatline-slug='slug-1'>word1</span>
-          <span data-neatline-slug='slug-1'>word2</span>
-          <span data-neatline-slug='slug-2'>word3</span>
+          <span data-neatline-slug='slug-2'>word2</span>
         ";
 
         $exhibit->save();
@@ -53,7 +52,7 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
     {
         $this->writeFixture(
             nl_getExhibitMarkup() . nl_getNarrativeMarkup(),
-            'neatline-partial.html'
+            'exhibit.html'
         );
     }
 
