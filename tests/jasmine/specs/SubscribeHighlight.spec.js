@@ -27,16 +27,15 @@ describe('Subscribe `highlight`', function() {
   });
 
 
-  it('should add `highlighted` class to corresponding span', function() {
+  it('should add `highlighted` class', function() {
 
     // --------------------------------------------------------------------
     // When `highlight` is triggered, the `highlighted` class should be
     // added to the corresponding element in the text.
     // --------------------------------------------------------------------
 
-    Neatline.vent.trigger('highlight', {
-      model: NARRATIVE.getMapRecordBySlug('slug-1')
-    });
+    var model = NARRATIVE.getMapRecordBySlug('slug-1');
+    Neatline.vent.trigger('highlight', { model: model });
 
     expect(span1).toHaveClass('highlighted');
     expect(span2).not.toHaveClass('highlighted');

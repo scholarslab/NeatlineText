@@ -11,12 +11,36 @@
 describe('Subscribe `select`', function() {
 
 
+  var span1, span2, fx = {
+    s12: readFixtures('records.s12.json')
+  };
+
+
   beforeEach(function() {
+
     NARRATIVE.loadNeatline();
+    NL.respondMap200(fx.s12);
+
+    span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
+    span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
+
   });
 
 
-  it('should add `selected` class to corresponding span(s)');
+  it('should add `selected` class', function() {
+
+    // --------------------------------------------------------------------
+    // When `select` is triggered, the `selected` class should be added to
+    // the corresponding element in the text.
+    // --------------------------------------------------------------------
+
+    var model = NARRATIVE.getMapRecordBySlug('slug-1');
+    Neatline.vent.trigger('select', { model: model });
+
+    expect(span1).toHaveClass('selected');
+    expect(span2).not.toHaveClass('selected');
+
+  });
 
 
 });

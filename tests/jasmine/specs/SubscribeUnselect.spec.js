@@ -11,12 +11,36 @@
 describe('Subscribe `unselect`', function() {
 
 
+  var span1, span2, fx = {
+    s12: readFixtures('records.s12.json')
+  };
+
+
   beforeEach(function() {
+
     NARRATIVE.loadNeatline();
+    NL.respondMap200(fx.s12);
+
+    span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
+    span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
+
   });
 
 
-  it('should remove `selected` class to corresponding span(s)');
+  it('should remove `selected` class', function() {
+
+    // --------------------------------------------------------------------
+    // When `unselect` is triggered, the `selected` class should be
+    // removed from the corresponding element in the text.
+    // --------------------------------------------------------------------
+
+    var model = NARRATIVE.getMapRecordBySlug('slug-1');
+    Neatline.vent.trigger('select', { model: model });
+    Neatline.vent.trigger('unselect', { model: model });
+
+    expect(span1).not.toHaveClass('selected');
+
+  });
 
 
 });

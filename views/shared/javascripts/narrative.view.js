@@ -30,7 +30,7 @@ Neatline.module('Narrative', function(
      * @param {Object} model: The record model.
      */
     highlight: function(model) {
-      this.getElementsFromSlug(model.get('slug')).addClass('highlighted');
+      this.getSpansFromSlug(model.get('slug')).addClass('highlighted');
     },
 
 
@@ -40,7 +40,7 @@ Neatline.module('Narrative', function(
      * @param {Object} model: The record model.
      */
     unhighlight: function(model) {
-      // TODO
+      this.getSpansFromSlug(model.get('slug')).removeClass('highlighted');
     },
 
 
@@ -50,7 +50,7 @@ Neatline.module('Narrative', function(
      * @param {Object} model: The record model.
      */
     select: function(model) {
-      // TODO
+      this.getSpansFromSlug(model.get('slug')).addClass('selected');
     },
 
 
@@ -60,7 +60,7 @@ Neatline.module('Narrative', function(
      * @param {Object} model: The record model.
      */
     unselect: function(model) {
-      // TODO
+      this.getSpansFromSlug(model.get('slug')).removeClass('selected');
     },
 
 
@@ -117,7 +117,7 @@ Neatline.module('Narrative', function(
      * @param {String} slug: A record slug.
      * @return {Object}: The DOM selection.
      */
-    getElementsFromSlug: function(slug) {
+    getSpansFromSlug: function(slug) {
       return this.$('[data-neatline-slug="'+slug+'"]');
     },
 
