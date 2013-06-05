@@ -27,50 +27,7 @@ Neatline.module('Narrative', function(
     /**
      * Initialize state trackers.
      */
-    init: function(model) {
-      this.model = null;
-    },
-
-
-    /**
-     * Add `highlighted` class to tagged spans.
-     *
-     * @param {Object} model: The record model.
-     */
-    highlight: function(model) {
-      this.getSpansWithSlug(model.get('slug')).addClass('highlighted');
-    },
-
-
-    /**
-     * Remove `highlighted` class from tagged spans.
-     *
-     * @param {Object} model: The record model.
-     */
-    unhighlight: function(model) {
-      this.getSpansWithSlug(model.get('slug')).removeClass('highlighted');
-    },
-
-
-    /**
-     * Add `selected` class to tagged spans.
-     *
-     * @param {Object} model: The record model.
-     */
-    select: function(model) {
-      if (this.model) this.unselect(this.model);
-      this.getSpansWithSlug(model.get('slug')).addClass('selected');
-      this.model = model;
-    },
-
-
-    /**
-     * Remove `selected` class from tagged spans.
-     *
-     * @param {Object} model: The record model.
-     */
-    unselect: function(model) {
-      this.getSpansWithSlug(model.get('slug')).removeClass('selected');
+    initialize: function(model) {
       this.model = null;
     },
 
@@ -103,8 +60,62 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onSelect: function(e) {
+
+      // Unselect the current model.
+      if (this.model) this.publish('unselect', this.model);
+
+      // Publish the new selection.
       var model = this.getModelFromEvent(e);
       if (model) this.publish('select', model);
+
+    },
+
+
+    /**
+     * Add `highlighted` class to tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    highlight: function(model) {
+      this.getSpansWithSlug(model.get('slug')).addClass('highlighted');
+    },
+
+
+    /**
+     * Remove `highlighted` class from tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    unhighlight: function(model) {
+      this.getSpansWithSlug(model.get('slug')).removeClass('highlighted');
+    },
+
+
+    /**
+     * Add `selected` class to tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    select: function(model) {
+
+      // Unselect the current model.
+      if (this.model) this.publish('unselect', this.model);
+
+      // Select the new model.
+      this.getSpansWithSlug(model.get('slug')).addClass('selected');
+      this.model = model;
+
+    },
+
+
+    /**
+     * Remove `selected` class from tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    unselect: function(model) {
+      this.getSpansWithSlug(model.get('slug')).removeClass('selected');
+      this.model = null;
     },
 
 

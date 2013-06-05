@@ -11,17 +11,21 @@
 describe('Event Publications', function() {
 
 
-  var model, span1, span3, vent;
+  var model1, model2, span1, span2, span3, vent;
 
 
   beforeEach(function() {
 
     NARRATIVE.loadNeatline();
 
-    model = NARRATIVE.getNarrativeRecordBySlug('slug-1');
+    model1  = NARRATIVE.getNarrativeRecordBySlug('slug-1');
+    model2  = NARRATIVE.getNarrativeRecordBySlug('slug-2');
+
     span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
+    span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
     span3 = NARRATIVE.find('span[data-neatline-slug="slug-3"]');
-    vent = spyOn(Neatline.vent, 'trigger');
+
+    vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
   });
 
@@ -38,7 +42,7 @@ describe('Event Publications', function() {
       span1.trigger('mouseenter');
 
       expect(vent).toHaveBeenCalledWith('highlight', {
-        model:  model,
+        model:  model1,
         source: Neatline.Narrative.ID
       });
 
@@ -71,7 +75,7 @@ describe('Event Publications', function() {
       span1.trigger('mouseleave');
 
       expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model:  model,
+        model:  model1,
         source: Neatline.Narrative.ID
       });
 
@@ -104,7 +108,7 @@ describe('Event Publications', function() {
       span1.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('select', {
-        model:  model,
+        model:  model1,
         source: Neatline.Narrative.ID
       });
 
@@ -119,6 +123,22 @@ describe('Event Publications', function() {
       span3.trigger('click');
 
       expect(vent).not.toHaveBeenCalledWith();
+
+    });
+
+    it('should unselect currently-selected model', function() {
+
+      // ------------------------------------------------------------------
+      // If another model is currently selected, it should be unselected.
+      // ------------------------------------------------------------------
+
+      span1.trigger('click');
+      span2.trigger('click');
+
+      expect(vent).toHaveBeenCalledWith('unselect', {
+        model:  model1,
+        source: Neatline.Narrative.ID
+      });
 
     });
 

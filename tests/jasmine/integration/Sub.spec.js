@@ -102,7 +102,7 @@ describe('Event Subscriptions', function() {
 
       // ------------------------------------------------------------------
       // Only one record should be selected at any given point; if another
-      // record is selected, it should be unselecte.
+      // record is selected, it should be unselected.
       // ------------------------------------------------------------------
 
       Neatline.vent.trigger('select', { model: model1 });
