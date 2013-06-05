@@ -18,7 +18,6 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var highlight = function(args) {
-    console.log(args);
     Narrative.__view.highlight(args.model);
   };
   Neatline.commands.setHandler(Narrative.ID+':highlight', highlight);

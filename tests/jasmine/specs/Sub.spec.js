@@ -12,14 +12,14 @@ describe('Event Subscriptions', function() {
 
 
   var span1, span2, model, fx = {
-    s12: readFixtures('records.s12.json')
+    records: readFixtures('records.json')
   };
 
 
   beforeEach(function() {
 
     NARRATIVE.loadNeatline();
-    NL.respondMap200(fx.s12);
+    NL.respondMap200(fx.records);
 
     span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
     span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');

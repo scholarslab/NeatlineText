@@ -25,42 +25,42 @@ Neatline.module('Narrative', function(
 
 
     /**
-     * Add `highlighted` class to elements tagged with a model's slug.
+     * Add `highlighted` class to tagged spans.
      *
      * @param {Object} model: The record model.
      */
     highlight: function(model) {
-      this.getSpansFromSlug(model.get('slug')).addClass('highlighted');
+      this.getSpansWithSlug(model.get('slug')).addClass('highlighted');
     },
 
 
     /**
-     * Remove `highlighted` class to elements tagged with a model's slug.
+     * Remove `highlighted` class from tagged spans.
      *
      * @param {Object} model: The record model.
      */
     unhighlight: function(model) {
-      this.getSpansFromSlug(model.get('slug')).removeClass('highlighted');
+      this.getSpansWithSlug(model.get('slug')).removeClass('highlighted');
     },
 
 
     /**
-     * Add `selected` class to elements tagged with a model's slug.
+     * Add `selected` class to tagged spans.
      *
      * @param {Object} model: The record model.
      */
     select: function(model) {
-      this.getSpansFromSlug(model.get('slug')).addClass('selected');
+      this.getSpansWithSlug(model.get('slug')).addClass('selected');
     },
 
 
     /**
-     * Remove `selected` class to elements tagged with a model's slug.
+     * Remove `selected` class from tagged spans.
      *
      * @param {Object} model: The record model.
      */
     unselect: function(model) {
-      this.getSpansFromSlug(model.get('slug')).removeClass('selected');
+      this.getSpansWithSlug(model.get('slug')).removeClass('selected');
     },
 
 
@@ -70,7 +70,7 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onHighlight: function(e) {
-      var model = this.getMapRecordFromEvent(e)
+      var model = this.getModelFromEvent(e);
       if (model) this.publish('highlight', model);
     },
 
@@ -81,7 +81,7 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onUnhighlight: function(e) {
-      var model = this.getMapRecordFromEvent(e)
+      var model = this.getModelFromEvent(e);
       if (model) this.publish('unhighlight', model);
     },
 
@@ -92,22 +92,8 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      */
     onSelect: function(e) {
-
-      // Try to publish existing model.
-      var model = this.getMapRecordFromEvent(e)
+      var model = this.getModelFromEvent(e);
       if (model) this.publish('select', model);
-
-      else {
-
-        var params = { slug: this.getSlugFromEvent(e) };
-
-        // Otherwise, load from the server.
-        Narrative.__collection.update(params, _.bind(function(records) {
-          this.publish('select', records.first());
-        }, this));
-
-      }
-
     },
 
 
@@ -117,7 +103,7 @@ Neatline.module('Narrative', function(
      * @param {String} slug: A record slug.
      * @return {Object}: The DOM selection.
      */
-    getSpansFromSlug: function(slug) {
+    getSpansWithSlug: function(slug) {
       return this.$('[data-neatline-slug="'+slug+'"]');
     },
 
@@ -134,17 +120,14 @@ Neatline.module('Narrative', function(
 
 
     /**
-     * Try to get a record from the map collection with a slug that
-     * matches the value of the `data-neatline-slug` attribute on the
-     * element associated with the passed event.
+     * Try to find a model in the collection that corresponds to a DOM
+     * event triggered from a tagged element.
      *
      * @param {Object} e: The DOM event.
      * @return {String}: The target element's slug.
      */
-    getMapRecordFromEvent: function(e) {
-      return Neatline.request('MAP:getRecords').findWhere({
-        slug: this.getSlugFromEvent(e)
-      });
+    getRecordFromEvent: function(e) {
+      // TODO
     },
 
 
