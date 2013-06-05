@@ -18,10 +18,10 @@ Neatline.module('Narrative', function(
     el: '#neatline-narrative',
 
     events: {
-      'mouseenter [data-neatline-slug]':  'onHighlight',
-      'mouseleave [data-neatline-slug]':  'onUnhighlight',
-      'click [data-neatline-slug]':       'onSelect',
-      'click':                            'onUnselect'
+      'mouseenter [data-neatline-slug]':  'publishHighlight',
+      'mouseleave [data-neatline-slug]':  'publishUnhighlight',
+      'click [data-neatline-slug]':       'publishSelect',
+      'click':                            'publishUnselect'
     },
 
 
@@ -33,12 +33,16 @@ Neatline.module('Narrative', function(
     },
 
 
+    // PUBLISHERS
+    // --------------------------------------------------------------------
+
+
     /**
      * Publish `highlight` when the cursor enters a span.
      *
      * @param {Object} e: The DOM event.
      */
-    onHighlight: function(e) {
+    publishHighlight: function(e) {
       var model = this.getModelFromEvent(e);
       if (model) this.publish('highlight', model);
     },
@@ -49,7 +53,7 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} e: The DOM event.
      */
-    onUnhighlight: function(e) {
+    publishUnhighlight: function(e) {
       var model = this.getModelFromEvent(e);
       if (model) this.publish('unhighlight', model);
     },
@@ -60,7 +64,7 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} e: The DOM event.
      */
-    onSelect: function(e) {
+    publishSelect: function(e) {
 
       // Unselect the current model.
       if (this.model) this.publish('unselect', this.model);
@@ -79,9 +83,13 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} e: The DOM event.
      */
-    onUnselect: function(e) {
+    publishUnselect: function(e) {
       if (this.model) this.publish('unselect', this.model);
     },
+
+
+    // RENDERERS
+    // --------------------------------------------------------------------
 
 
     /**
@@ -89,7 +97,7 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} model: The record model.
      */
-    highlight: function(model) {
+    renderHighlight: function(model) {
       this.getSpansWithSlug(model.get('slug')).addClass('highlighted');
     },
 
@@ -99,7 +107,7 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} model: The record model.
      */
-    unhighlight: function(model) {
+    renderUnhighlight: function(model) {
       this.getSpansWithSlug(model.get('slug')).removeClass('highlighted');
     },
 
@@ -109,7 +117,7 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} model: The record model.
      */
-    select: function(model) {
+    renderSelect: function(model) {
 
       // Unselect the current model.
       if (this.model) this.publish('unselect', this.model);
@@ -126,10 +134,14 @@ Neatline.module('Narrative', function(
      *
      * @param {Object} model: The record model.
      */
-    unselect: function(model) {
+    renderUnselect: function(model) {
       this.getSpansWithSlug(model.get('slug')).removeClass('selected');
       this.model = null;
     },
+
+
+    // HELPERS
+    // --------------------------------------------------------------------
 
 
     /**

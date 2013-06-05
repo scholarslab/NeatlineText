@@ -18,7 +18,7 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var highlight = function(args) {
-    Narrative.__view.highlight(args.model);
+    Narrative.__view.renderHighlight(args.model);
   };
   Neatline.commands.setHandler(Narrative.ID+':highlight', highlight);
   Neatline.vent.on('highlight', highlight);
@@ -30,7 +30,7 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var unhighlight = function(args) {
-    Narrative.__view.unhighlight(args.model);
+    Narrative.__view.renderUnhighlight(args.model);
   };
   Neatline.commands.setHandler(Narrative.ID+':unhighlight', unhighlight);
   Neatline.vent.on('unhighlight', unhighlight);
@@ -42,7 +42,7 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var select = function(args) {
-    Narrative.__view.select(args.model);
+    Narrative.__view.renderSelect(args.model);
     unhighlight(args);
   };
   Neatline.commands.setHandler(Narrative.ID+':select', select);
@@ -55,7 +55,7 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var unselect = function(args) {
-    Narrative.__view.unselect(args.model);
+    Narrative.__view.renderUnselect(args.model);
     unhighlight(args);
   };
   Neatline.commands.setHandler(Narrative.ID+':unselect', unselect);
