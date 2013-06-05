@@ -14,8 +14,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 {
 
 
-    const NAME  = 'Narrative';
-    const ID    = 'Narrative';
+    const ID = 'Narrative';
 
 
     protected $_hooks = array(
@@ -25,7 +24,8 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 
     protected $_filters = array(
         'neatline_exhibit_widgets',
-        'neatline_record_widgets'
+        'neatline_record_widgets',
+        'neatline_globals'
     );
 
 
@@ -52,7 +52,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineExhibitWidgets($widgets)
     {
         return array_merge($widgets, array(
-            self::NAME => self::ID
+            self::ID => self::ID
         ));
     }
 
@@ -66,8 +66,31 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineRecordWidgets($widgets)
     {
         return array_merge($widgets, array(
-            self::NAME => self::ID
+            self::ID => self::ID
         ));
+    }
+
+
+    /**
+     * Bootstrap exhibit narrative models on `Neatline.g`.
+     *
+     * @param array $globals The array of global properties.
+     * @param array $args Contains: `exhibit` (NeatlineExhibit).
+     * @return array The modified array.
+     */
+    public function filterNeatlineGlobals($globals, $args)
+    {
+
+        // Query for narrative models.
+        $result = $this->_db->getTable('NeatlineRecord')->queryRecords(
+            $args['exhibit'], array('widget' => self::ID)
+        );
+
+        // Push collection onto `Neatline.g`.
+        return array_merge($globals, array('narrative' => array(
+            'records' => $result['records']
+        )));
+
     }
 
 

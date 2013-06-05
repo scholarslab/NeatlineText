@@ -16,44 +16,45 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
     protected $_isAdminTest = false;
 
 
-    /**
-     * Inject the real `layers.json`, mock exhibit.
-     */
-    public function setUp()
+    public function testNeatlinePartial()
     {
 
-        parent::setUp();
-
-        // Register script path.
         get_view()->addScriptPath(NL_DIR . '/views/shared');
 
-        // Mock exhibit.
+        // EXHIBIT
+        // -------
+
         $exhibit = $this->__exhibit();
         $exhibit->base_layer = "OpenStreetMap";
 
-        // Mock narrative.
         $exhibit->narrative = "
           <span data-neatline-slug='slug-1'>word1</span>
           <span data-neatline-slug='slug-2'>word2</span>
+          <span data-neatline-slug='slug-3'>word3</span>
         ";
 
         $exhibit->save();
-
-        // Set exhibit on view.
         get_view()->neatline_exhibit = $exhibit;
 
-    }
+        // RECORDS
+        // -------
 
+        $record1 = $this->__record($exhibit);
+        $record2 = $this->__record($exhibit);
 
-    /**
-     * `neatline-partial.html`
-     */
-    public function testNeatlinePartial()
-    {
+        $record1->widgets = 'Narrative';
+        $record2->widgets = 'Narrative';
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+
+        $record1->save();
+        $record2->save();
+
         $this->writeFixture(
             nl_getExhibitMarkup() . nl_getNarrativeMarkup(),
             'exhibit.html'
         );
+
     }
 
 

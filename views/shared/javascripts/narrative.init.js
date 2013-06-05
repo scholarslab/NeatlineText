@@ -16,8 +16,14 @@ Neatline.module('Narrative', function(
 
 
   Narrative.addInitializer(function() {
-    Narrative.__collection = new Neatline.Shared.Record.Collection();
+
+    // Bootstrap text models.
+    Narrative.__collection = new Neatline.Shared.Record.Collection(
+      Neatline.g.narrative.records
+    );
+
     Narrative.__view = new Narrative.View();
+
   });
 
 

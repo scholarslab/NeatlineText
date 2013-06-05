@@ -126,8 +126,10 @@ Neatline.module('Narrative', function(
      * @param {Object} e: The DOM event.
      * @return {String}: The target element's slug.
      */
-    getRecordFromEvent: function(e) {
-      // TODO
+    getModelFromEvent: function(e) {
+      return Narrative.__collection.findWhere({
+        slug: this.getSlugFromEvent(e)
+      });
     },
 
 

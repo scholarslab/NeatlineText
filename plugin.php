@@ -15,5 +15,6 @@ if (!defined('NL_NARRATIVE_DIR')) {
 }
 
 require_once NL_NARRATIVE_DIR . '/NeatlineNarrativePlugin.php';
+
 $narrative = new NeatlineNarrativePlugin();
 $narrative->setUp();
