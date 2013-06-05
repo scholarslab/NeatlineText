@@ -43,6 +43,7 @@ Neatline.module('Narrative', function(
    */
   var select = function(args) {
     Narrative.__view.renderSelect(args.model);
+    Narrative.__view.scrollTo(args.model);
     unhighlight(args);
   };
   Neatline.commands.setHandler(Narrative.ID+':select', select);

@@ -24,6 +24,11 @@ Neatline.module('Narrative', function(
       'click':                            'publishUnselect'
     },
 
+    options: {
+      duration: 100,
+      padding: 200
+    },
+
 
     /**
      * Initialize state trackers.
@@ -66,8 +71,7 @@ Neatline.module('Narrative', function(
      */
     publishSelect: function(e) {
 
-      // Unselect the current model.
-      if (this.model) this.publish('unselect', this.model);
+      this.publishUnselect();
 
       // Publish the new selection.
       var model = this.getModelFromEvent(e);
@@ -80,10 +84,8 @@ Neatline.module('Narrative', function(
 
     /**
      * Unselect the current model on click-off.
-     *
-     * @param {Object} e: The DOM event.
      */
-    publishUnselect: function(e) {
+    publishUnselect: function() {
       if (this.model) this.publish('unselect', this.model);
     },
 
@@ -119,8 +121,7 @@ Neatline.module('Narrative', function(
      */
     renderSelect: function(model) {
 
-      // Unselect the current model.
-      if (this.model) this.publish('unselect', this.model);
+      this.publishUnselect();
 
       // Select the new model.
       this.getSpansWithSlug(model.get('slug')).addClass('selected');
@@ -137,6 +138,26 @@ Neatline.module('Narrative', function(
     renderUnselect: function(model) {
       this.getSpansWithSlug(model.get('slug')).removeClass('selected');
       this.model = null;
+    },
+
+
+    /**
+     * Scroll to the spans for a model.
+     *
+     * @param {Object} model: The record model.
+     */
+    scrollTo: function(model) {
+
+      // Get the first span tagged with the slug.
+      var span = this.getSpansWithSlug(model.get('slug'))[0];
+
+      // Scroll to span.
+      $('body').animate({
+        scrollTop: $(span).offset().top - this.options.padding
+      }, {
+        duration: this.options.duration
+      });
+
     },
 
 
