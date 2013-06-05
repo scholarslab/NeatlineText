@@ -24,7 +24,8 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     protected $_filters = array(
-        'neatline_exhibit_widgets'
+        'neatline_exhibit_widgets',
+        'neatline_record_widgets'
     );
 
 
@@ -49,6 +50,20 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
      * @return array The modified array.
      */
     public function filterNeatlineExhibitWidgets($widgets)
+    {
+        return array_merge($widgets, array(
+            self::NAME => self::ID
+        ));
+    }
+
+
+    /**
+     * Register the record widget.
+     *
+     * @param array $widgets Widgets, <NAME> => <ID>.
+     * @return array The modified array.
+     */
+    public function filterNeatlineRecordWidgets($widgets)
     {
         return array_merge($widgets, array(
             self::NAME => self::ID
