@@ -25,7 +25,7 @@ Neatline.module('Narrative', function(
     },
 
     options: {
-      duration: 100,
+      duration: 200,
       padding: 200
     },
 
