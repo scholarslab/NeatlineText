@@ -25,6 +25,14 @@ Neatline.module('Narrative', function(
 
 
     /**
+     * Initialize state trackers.
+     */
+    init: function(model) {
+      this.model = null;
+    },
+
+
+    /**
      * Add `highlighted` class to tagged spans.
      *
      * @param {Object} model: The record model.
@@ -50,7 +58,9 @@ Neatline.module('Narrative', function(
      * @param {Object} model: The record model.
      */
     select: function(model) {
+      if (this.model) this.unselect(this.model);
       this.getSpansWithSlug(model.get('slug')).addClass('selected');
+      this.model = model;
     },
 
 
@@ -61,6 +71,7 @@ Neatline.module('Narrative', function(
      */
     unselect: function(model) {
       this.getSpansWithSlug(model.get('slug')).removeClass('selected');
+      this.model = null;
     },
 
 

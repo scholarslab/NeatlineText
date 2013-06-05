@@ -11,7 +11,7 @@
 describe('Event Subscriptions', function() {
 
 
-  var span1, span2, model, fx = {
+  var span1, span2, model1, model2, fx = {
     records: readFixtures('records.json')
   };
 
@@ -24,7 +24,8 @@ describe('Event Subscriptions', function() {
     span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
     span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
 
-    model = NARRATIVE.getMapRecordBySlug('slug-1');
+    model1 = NARRATIVE.getMapRecordBySlug('slug-1');
+    model2 = NARRATIVE.getMapRecordBySlug('slug-2');
 
   });
 
@@ -38,7 +39,7 @@ describe('Event Subscriptions', function() {
       // added to the corresponding element in the text.
       // ------------------------------------------------------------------
 
-      Neatline.vent.trigger('highlight', { model: model });
+      Neatline.vent.trigger('highlight', { model: model1 });
 
       expect(span1).toHaveClass('highlighted');
       expect(span2).not.toHaveClass('highlighted');
@@ -57,8 +58,8 @@ describe('Event Subscriptions', function() {
       // be removed to the corresponding element in the text.
       // ------------------------------------------------------------------
 
-      Neatline.vent.trigger('highlight', { model: model });
-      Neatline.vent.trigger('unhighlight', { model: model });
+      Neatline.vent.trigger('highlight', { model: model1 });
+      Neatline.vent.trigger('unhighlight', { model: model1 });
 
       expect(span1).not.toHaveClass('highlighted');
 
@@ -76,7 +77,7 @@ describe('Event Subscriptions', function() {
       // to the corresponding elements in the text.
       // ------------------------------------------------------------------
 
-      Neatline.vent.trigger('select', { model: model });
+      Neatline.vent.trigger('select', { model: model1 });
 
       expect(span1).toHaveClass('selected');
       expect(span2).not.toHaveClass('selected');
@@ -86,15 +87,29 @@ describe('Event Subscriptions', function() {
     it('should remove `highlighted` class', function() {
 
       // ------------------------------------------------------------------
-      // When `select` is triggered, corresponding elements in the text
-      // should be unhighlighted, which prevents the `highlighted` class
-      // from getting stuck when the reocrd is unselected.
+      // The `highlighted` class should be removed, in case it was added
+      // before the record was selected.
       // ------------------------------------------------------------------
 
-      Neatline.vent.trigger('highlight', { model: model });
-      Neatline.vent.trigger('select', { model: model });
+      Neatline.vent.trigger('highlight', { model: model1 });
+      Neatline.vent.trigger('select', { model: model1 });
 
       expect(span1).not.toHaveClass('highlighted');
+
+    });
+
+    it('should unselect currently-selected model', function() {
+
+      // ------------------------------------------------------------------
+      // Only one record should be selected at any given point; if another
+      // record is selected, it should be unselecte.
+      // ------------------------------------------------------------------
+
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('select', { model: model2 });
+
+      expect(span1).not.toHaveClass('selected');
+      expect(span2).toHaveClass('selected');
 
     });
 
@@ -110,10 +125,24 @@ describe('Event Subscriptions', function() {
       // removed from the corresponding element in the text.
       // ------------------------------------------------------------------
 
-      Neatline.vent.trigger('select', { model: model });
-      Neatline.vent.trigger('unselect', { model: model });
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('unselect', { model: model1 });
 
       expect(span1).not.toHaveClass('selected');
+
+    });
+
+    it('should remove `highlighted` class', function() {
+
+      // ------------------------------------------------------------------
+      // The `highlighted` class should also be removed, in case it was
+      // added before the record was selected.
+      // ------------------------------------------------------------------
+
+      Neatline.vent.trigger('highlight', { model: model1 });
+      Neatline.vent.trigger('unselect', { model: model1 });
+
+      expect(span1).not.toHaveClass('highlighted');
 
     });
 

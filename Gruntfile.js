@@ -120,7 +120,7 @@ module.exports = function(grunt) {
           paths.payloads.shared.js+'/narrative-public.js'
         ],
         options: {
-          specs: paths.jasmine+'/specs/**/*.spec.js'
+          specs: paths.jasmine+'/integration/**/*.spec.js'
         }
       }
 

@@ -56,6 +56,7 @@ Neatline.module('Narrative', function(
    */
   var unselect = function(args) {
     Narrative.__view.unselect(args.model);
+    unhighlight(args);
   };
   Neatline.commands.setHandler(Narrative.ID+':unselect', unselect);
   Neatline.vent.on('unselect', unselect);
