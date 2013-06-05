@@ -20,7 +20,8 @@ Neatline.module('Narrative', function(
     events: {
       'mouseenter [data-neatline-slug]':  'onHighlight',
       'mouseleave [data-neatline-slug]':  'onUnhighlight',
-      'click [data-neatline-slug]':       'onSelect'
+      'click [data-neatline-slug]':       'onSelect',
+      'click':                            'onUnselect'
     },
 
 
@@ -68,6 +69,18 @@ Neatline.module('Narrative', function(
       var model = this.getModelFromEvent(e);
       if (model) this.publish('select', model);
 
+      e.stopPropagation();
+
+    },
+
+
+    /**
+     * Unselect the current model on click-off.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    onUnselect: function(e) {
+      if (this.model) this.publish('unselect', this.model);
     },
 
 

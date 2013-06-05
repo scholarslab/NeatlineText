@@ -114,6 +114,24 @@ describe('Event Publications', function() {
 
     });
 
+    it('should not trigger click-off', function() {
+
+      // ------------------------------------------------------------------
+      // When a tagged element is clicked, event propagation should be
+      // manually halted at the level of the span element. Otherwise, the
+      // event would bubble up to the container and trigger the click-off
+      // unselect, which would negate the selection.
+      // ------------------------------------------------------------------
+
+      span1.trigger('click');
+
+      expect(vent).not.toHaveBeenCalledWith('unselect', {
+        model:  model1,
+        source: Neatline.Narrative.ID
+      });
+
+    });
+
     it('should not publish when model does not exist', function() {
 
       // ------------------------------------------------------------------
@@ -134,6 +152,29 @@ describe('Event Publications', function() {
 
       span1.trigger('click');
       span2.trigger('click');
+
+      expect(vent).toHaveBeenCalledWith('unselect', {
+        model:  model1,
+        source: Neatline.Narrative.ID
+      });
+
+    });
+
+  });
+
+
+  describe('unselect', function() {
+
+    it('should unselect on click-off', function() {
+
+      // ------------------------------------------------------------------
+      // When the cursor "clicks off" a span selection - when it clicks
+      // anywhere inside the container but _not_ on a tagged element - the
+      // currently-selected model should be unselected.
+      // ------------------------------------------------------------------
+
+      span1.trigger('click');
+      Neatline.Narrative.__view.$el.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('unselect', {
         model:  model1,
