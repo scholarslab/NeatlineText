@@ -4,5 +4,6 @@
          verbose="true">
     <testsuite name="Neatline Narrative Tests">
         <directory>fixtures</directory>
+        <directory>integration</directory>
     </testsuite>
 </phpunit>

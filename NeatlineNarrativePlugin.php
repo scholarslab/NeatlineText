@@ -47,9 +47,10 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
      * Add `hasSlug` parameter to records API.
      *
      * @param Omeka_Db_Select $select The original select.
+     * @param array $params The API query parameters.
      * @return Omeka_Db_Select The modified select.
      */
-    public function filterNeatlineQueryRecords($select)
+    public function filterNeatlineQueryRecords($select, $params)
     {
         if (isset($params['hasSlug']) && $params['hasSlug']) {
             $select->where('slug IS NOT NULL');
@@ -66,9 +67,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterNeatlineExhibitWidgets($widgets)
     {
-        return array_merge($widgets, array(
-            self::ID => self::ID
-        ));
+        return array_merge($widgets, array(self::ID => self::ID));
     }
 
 

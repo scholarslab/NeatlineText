@@ -26,10 +26,14 @@ class NeatlineNarrative_Case_Default extends Neatline_Case_Abstract
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Install Neatline and NeatlineWaypoints.
+        // Install Neatline and NeatlineNarrative.
         $pluginHelper = new Omeka_Test_Helper_Plugin;
         $pluginHelper->setUp('Neatline');
         $pluginHelper->setUp('NeatlineNarrative');
+
+        // Get plugin tables.
+        $this->__exhibits = $this->db->getTable('NeatlineExhibit');
+        $this->__records  = $this->db->getTable('NeatlineRecord');
 
     }
 
