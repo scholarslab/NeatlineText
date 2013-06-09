@@ -23,8 +23,8 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     protected $_filters = array(
+        'neatline_query_records',
         'neatline_exhibit_widgets',
-        'neatline_record_widgets',
         'neatline_globals'
     );
 
@@ -44,26 +44,27 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
+     * Add `hasSlug` parameter to records API.
+     *
+     * @param Omeka_Db_Select $select The original select.
+     * @return Omeka_Db_Select The modified select.
+     */
+    public function filterNeatlineQueryRecords($select)
+    {
+        if (isset($params['hasSlug']) && $params['hasSlug']) {
+            $select->where('slug IS NOT NULL');
+        }
+        return $select;
+    }
+
+
+    /**
      * Register the exhibit widget.
      *
      * @param array $widgets Widgets, <NAME> => <ID>.
      * @return array The modified array.
      */
     public function filterNeatlineExhibitWidgets($widgets)
-    {
-        return array_merge($widgets, array(
-            self::ID => self::ID
-        ));
-    }
-
-
-    /**
-     * Register the record widget.
-     *
-     * @param array $widgets Widgets, <NAME> => <ID>.
-     * @return array The modified array.
-     */
-    public function filterNeatlineRecordWidgets($widgets)
     {
         return array_merge($widgets, array(
             self::ID => self::ID
@@ -83,7 +84,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Query for narrative models.
         $result = $this->_db->getTable('NeatlineRecord')->queryRecords(
-            $args['exhibit'], array('widget' => self::ID)
+            $args['exhibit'], array('hasSlug' => true)
         );
 
         // Push collection onto `Neatline.g`.

@@ -22,7 +22,7 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         get_view()->addScriptPath(NL_DIR . '/views/shared');
 
         // EXHIBIT
-        // -------
+        // ----------------------------------------------------------------
 
         $exhibit = $this->__exhibit();
         $exhibit->base_layer = "OpenStreetMap";
@@ -37,13 +37,10 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         get_view()->neatline_exhibit = $exhibit;
 
         // RECORDS
-        // -------
+        // ----------------------------------------------------------------
 
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
-
-        $record1->widgets = 'Narrative';
-        $record2->widgets = 'Narrative';
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
 
