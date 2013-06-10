@@ -50,7 +50,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
      * @param array $params The API query parameters.
      * @return Omeka_Db_Select The modified select.
      */
-    public function filterNeatlineQueryRecords($select, $params)
+    public function filterNeatlineQueryRecords($select, $params=array())
     {
         if (isset($params['hasSlug']) && $params['hasSlug']) {
             $select->where('slug IS NOT NULL');
