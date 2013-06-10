@@ -152,8 +152,8 @@ Neatline.module('Narrative', function(
       var span = this.getSpansWithSlug(model.get('slug'))[0];
 
       // Scroll to span.
-      $('body').animate({
-        scrollTop: $(span).offset().top - this.options.padding
+      this.$el.animate({
+        scrollTop: span.offsetTop - this.options.padding
       }, {
         duration: this.options.duration
       });
