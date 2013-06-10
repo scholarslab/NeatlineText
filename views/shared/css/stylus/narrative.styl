@@ -9,17 +9,22 @@
  */
 
 
+@import '_colors'
+
+
 #neatline-narrative
 
   [data-neatline-slug]
-    // TODO|dev
-    border-bottom 1px dashed gray
+    border-bottom 3px solid color-highlighted
+    padding 0 3px
     cursor pointer
 
-  // TODO|dev
-  .highlighted
-    background gray
+  .highlighted, .selected
+    color white
+    border 0
 
-  // TODO|dev
+  .highlighted
+    background color-highlighted
+
   .selected
-    background green
+    background color-selected
