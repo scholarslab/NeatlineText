@@ -9,22 +9,16 @@
  */
 
 
-@import '_colors'
-
-
 #neatline-narrative
 
   [data-neatline-slug]
-    border-bottom 3px solid color-highlighted
-    padding 0 3px
+    background lighten(yellow, 80%)
     cursor pointer
-
-  .highlighted, .selected
-    color white
-    border 0
+    padding 0 5px
 
   .highlighted
-    background color-highlighted
+    background lighten(yellow, 50%)
 
   .selected
-    background color-selected
+    background #0b5fa5
+    color white
