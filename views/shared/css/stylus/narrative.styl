@@ -9,16 +9,14 @@
  */
 
 
-#neatline-narrative
+[data-neatline-slug]
+  background lighten(yellow, 80%)
+  cursor pointer
+  padding 0 5px
 
-  [data-neatline-slug]
-    background lighten(yellow, 80%)
-    cursor pointer
-    padding 0 5px
-
-  .highlighted
+  &.highlighted
     background lighten(yellow, 50%)
 
-  .selected
+  &.selected
     background #0b5fa5
     color white
