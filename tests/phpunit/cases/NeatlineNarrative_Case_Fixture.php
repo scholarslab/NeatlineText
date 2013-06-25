@@ -27,7 +27,7 @@ class NeatlineNarrative_Case_Fixture
         parent::setUp();
 
         // Create mock exhibit.
-        $this->exhibit = $this->__exhibit();
+        $this->exhibit = $this->_exhibit();
 
         // Set `exhibit_id` GET parameter.
         $this->request->setQuery(array(

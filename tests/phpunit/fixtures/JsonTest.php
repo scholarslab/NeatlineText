@@ -19,8 +19,8 @@ class FixturesTest_JSON extends NeatlineNarrative_Case_Fixture
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
 
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
@@ -28,7 +28,7 @@ class FixturesTest_JSON extends NeatlineNarrative_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'records.json'
         );
 

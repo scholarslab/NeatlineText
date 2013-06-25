@@ -21,7 +21,7 @@ class NeatlineNarrativePluginTest_FilterNeatlineQueryRecords
     public function testFilterNeatlineQueryRecords()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record1->slug = 'slug';
@@ -31,7 +31,7 @@ class NeatlineNarrativePluginTest_FilterNeatlineQueryRecords
         $record2->save();
 
         // Query for `hasSlug`.
-        $result = $this->__records->queryRecords($exhibit,
+        $result = $this->_records->queryRecords($exhibit,
             array('hasSlug' => true)
         );
 

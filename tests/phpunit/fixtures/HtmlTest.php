@@ -24,7 +24,7 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         // EXHIBIT
         // ----------------------------------------------------------------
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->base_layer = "OpenStreetMap";
 
         $exhibit->narrative = "
@@ -39,15 +39,15 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         // RECORDS
         // ----------------------------------------------------------------
 
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
+        $record1 = $this->_record($exhibit);
+        $record2 = $this->_record($exhibit);
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
 
         $record1->save();
         $record2->save();
 
-        $this->writeFixture(
+        $this->_writeFixture(
             nl_getExhibitMarkup() . nl_getNarrativeMarkup(),
             'exhibit.html'
         );
