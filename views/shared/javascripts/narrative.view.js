@@ -83,7 +83,7 @@ Neatline.module('Narrative', function(
 
 
     /**
-     * Unselect the current model on click-off.
+     * Unselect the currently-selected model.
      */
     publishUnselect: function() {
       if (this.model) this.publish('unselect', this.model);
@@ -120,13 +120,8 @@ Neatline.module('Narrative', function(
      * @param {Object} model: The record model.
      */
     renderSelect: function(model) {
-
-      this.publishUnselect();
-
-      // Select the new model.
       this.getSpansWithSlug(model.get('slug')).addClass('selected');
       this.model = model;
-
     },
 
 

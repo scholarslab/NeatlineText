@@ -98,21 +98,6 @@ describe('Event Subscriptions', function() {
 
     });
 
-    it('should unselect currently-selected model', function() {
-
-      // ------------------------------------------------------------------
-      // Only one record should be selected at any given point; if another
-      // record is selected, it should be unselected.
-      // ------------------------------------------------------------------
-
-      Neatline.vent.trigger('select', { model: model1 });
-      Neatline.vent.trigger('select', { model: model2 });
-
-      expect(span1).not.toHaveClass('selected');
-      expect(span2).toHaveClass('selected');
-
-    });
-
   });
 
 
