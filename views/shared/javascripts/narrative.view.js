@@ -145,8 +145,8 @@ Neatline.module('Narrative', function(
 
       // Get the first span tagged with the slug.
       var span = this.getSpansWithSlug(model.get('slug'))[0];
+      if (!span) return;
 
-      // Scroll to span.
       this.$el.animate({
         scrollTop: span.offsetTop - this.options.padding
       }, {
