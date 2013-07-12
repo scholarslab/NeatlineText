@@ -25,7 +25,7 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         // ----------------------------------------------------------------
 
         $exhibit = $this->_exhibit();
-        $exhibit->base_layer = "OpenStreetMap";
+        $exhibit->spatial_layer = "OpenStreetMap";
 
         $exhibit->narrative = "
           <span data-neatline-slug='slug-1'>word1</span>
