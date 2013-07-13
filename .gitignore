@@ -4,5 +4,8 @@ components
 .grunt
 pkg
 
-Neatline
+views/shared/javascripts/payloads
+views/shared/css/payloads
+
+*Neatline
 _SpecRunner.html

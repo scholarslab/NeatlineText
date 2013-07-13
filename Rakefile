@@ -11,6 +11,14 @@ require 'rake/packagetask'
 require 'fileutils'
 
 
+desc "Force-commit .gitignored static assets"
+task :commit_compiled do
+  sh %{git add -f views/shared/javascripts/payloads}
+  sh %{git add -f views/shared/css/payloads}
+  sh %{git commit -m "Committing compiled assets."}
+end
+
+
 class PackageTask < Rake::PackageTask
 
   def package_name
