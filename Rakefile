@@ -1,22 +1,14 @@
 
 # vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
-# @package     omeka
-# @subpackage  neatline-Narrative
+# @package     neatline
+# @subpackage  texts
 # @copyright   2012 Rector and Board of Visitors, University of Virginia
 # @license     http://www.apache.org/licenses/LICENSE-2.0.html
 
 
 require 'rake/packagetask'
 require 'fileutils'
-
-
-desc "Force-commit .gitignored static assets"
-task :commit_compiled do
-  sh %{git add -f views/shared/javascripts/payloads}
-  sh %{git add -f views/shared/css/payloads}
-  sh %{git commit -m "Committing compiled assets."}
-end
 
 
 class PackageTask < Rake::PackageTask
