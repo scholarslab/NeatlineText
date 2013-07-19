@@ -4,17 +4,17 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 
-if (!defined('NL_NARRATIVE_DIR')) {
-    define('NL_NARRATIVE_DIR', dirname(__FILE__));
+if (!defined('NL_TEXT_DIR')) {
+    define('NL_TEXT_DIR', dirname(__FILE__));
 }
 
-require_once NL_NARRATIVE_DIR . '/NeatlineNarrativePlugin.php';
+require_once NL_TEXT_DIR . '/NeatlineTextPlugin.php';
 
-$narrative = new NeatlineNarrativePlugin();
-$narrative->setUp();
+$text = new NeatlineTextPlugin();
+$text->setUp();

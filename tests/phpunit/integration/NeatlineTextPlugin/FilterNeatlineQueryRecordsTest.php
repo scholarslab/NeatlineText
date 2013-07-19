@@ -9,8 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineNarrativePluginTest_FilterNeatlineQueryRecords
-    extends NeatlineNarrative_Case_Default
+class NeatlineTextPluginTest_FilterNeatlineQueryRecords
+    extends NeatlineText_Case_Default
 {
 
 

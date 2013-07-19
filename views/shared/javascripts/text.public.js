@@ -3,13 +3,13 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Narrative', function(
-  Narrative, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Text', function(
+  Text, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
@@ -18,9 +18,9 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var highlight = function(args) {
-    Narrative.__view.renderHighlight(args.model);
+    Text.__view.renderHighlight(args.model);
   };
-  Neatline.commands.setHandler(Narrative.ID+':highlight', highlight);
+  Neatline.commands.setHandler(Text.ID+':highlight', highlight);
   Neatline.vent.on('highlight', highlight);
 
 
@@ -30,9 +30,9 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var unhighlight = function(args) {
-    Narrative.__view.renderUnhighlight(args.model);
+    Text.__view.renderUnhighlight(args.model);
   };
-  Neatline.commands.setHandler(Narrative.ID+':unhighlight', unhighlight);
+  Neatline.commands.setHandler(Text.ID+':unhighlight', unhighlight);
   Neatline.vent.on('unhighlight', unhighlight);
 
 
@@ -42,11 +42,11 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var select = function(args) {
-    Narrative.__view.renderSelect(args.model);
-    Narrative.__view.scrollTo(args.model);
+    Text.__view.renderSelect(args.model);
+    Text.__view.scrollTo(args.model);
     unhighlight(args);
   };
-  Neatline.commands.setHandler(Narrative.ID+':select', select);
+  Neatline.commands.setHandler(Text.ID+':select', select);
   Neatline.vent.on('select', select);
 
 
@@ -56,10 +56,10 @@ Neatline.module('Narrative', function(
    * @param {Object} args: Event arguments.
    */
   var unselect = function(args) {
-    Narrative.__view.renderUnselect(args.model);
+    Text.__view.renderUnselect(args.model);
     unhighlight(args);
   };
-  Neatline.commands.setHandler(Narrative.ID+':unselect', unselect);
+  Neatline.commands.setHandler(Text.ID+':unselect', unselect);
   Neatline.vent.on('unselect', unselect);
 
 

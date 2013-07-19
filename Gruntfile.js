@@ -3,7 +3,7 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
@@ -70,23 +70,23 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      narrative: {
+      text: {
         src: paths.src.shared+'/*.js',
-        dest: paths.payloads.shared.js+'/narrative-public.js'
+        dest: paths.payloads.shared.js+'/text-public.js'
       }
     },
 
     uglify: {
-      narrative: {
-        src: '<%= concat.narrative.src %>',
-        dest: paths.payloads.shared.js+'/narrative-public.js'
+      text: {
+        src: '<%= concat.text.src %>',
+        dest: paths.payloads.shared.js+'/text-public.js'
       }
     },
 
     stylus: {
       compile: {
         files: {
-          './views/shared/css/payloads/narrative-public.css':
+          './views/shared/css/payloads/text-public.css':
             paths.stylus.shared+'/*.styl'
         }
       }
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
     watch: {
       payload: {
         files: [
-          '<%= concat.narrative.src %>',
+          '<%= concat.text.src %>',
           paths.stylus.shared+'/**/*.styl'
         ],
         tasks: ['compile']
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
       neatline: {
         src: [
           './Neatline/'+nlPaths.payloads.shared.js+'/neatline-public.js',
-          paths.payloads.shared.js+'/narrative-public.js'
+          paths.payloads.shared.js+'/text-public.js'
         ],
         options: {
           specs: paths.jasmine+'/integration/**/*.spec.js'

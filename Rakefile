@@ -2,7 +2,7 @@
 # vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 # @package     neatline
-# @subpackage  texts
+# @subpackage  text
 # @copyright   2012 Rector and Board of Visitors, University of Virginia
 # @license     http://www.apache.org/licenses/LICENSE-2.0.html
 
@@ -32,7 +32,7 @@ class PackageTask < Rake::PackageTask
 end
 
 
-PackageTask.new('NeatlineNarrative') do |p|
+PackageTask.new('NeatlineText') do |p|
 
   p.version     = IO.readlines('version')[0].strip
   p.need_tar_gz = true
@@ -44,7 +44,7 @@ PackageTask.new('NeatlineNarrative') do |p|
   p.package_files.include('README.md')
 
   # Application --
-  p.package_files.include('NeatlineNarrativePlugin.php')
+  p.package_files.include('NeatlineTextPlugin.php')
 
   # Payloads --
   p.package_files.include('views/**/payloads/**/*')

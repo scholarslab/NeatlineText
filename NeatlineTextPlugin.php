@@ -4,17 +4,17 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 
-class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
+class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
 {
 
 
-    const ID = 'Narrative';
+    const ID = 'Text';
 
 
     protected $_hooks = array(
@@ -37,8 +37,8 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookNeatlinePublicStatic($args)
     {
         if ($args['exhibit']->hasWidget(self::ID)) {
-            queue_css_file('payloads/narrative-public');
-            queue_js_file('payloads/narrative-public');
+            queue_css_file('payloads/text-public');
+            queue_js_file('payloads/text-public');
         }
     }
 
@@ -72,7 +72,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Bootstrap exhibit narrative models on `Neatline.g`.
+     * Bootstrap text-active records on `Neatline.g`.
      *
      * @param array $globals The array of global properties.
      * @param array $args Contains: `exhibit` (NeatlineExhibit).
@@ -87,7 +87,7 @@ class NeatlineNarrativePlugin extends Omeka_Plugin_AbstractPlugin
         );
 
         // Push collection onto `Neatline.g`.
-        return array_merge($globals, array('narrative' => array(
+        return array_merge($globals, array('text' => array(
             'records' => $result['records']
         )));
 

@@ -3,7 +3,7 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
@@ -16,14 +16,14 @@ describe('Event Publications', function() {
 
   beforeEach(function() {
 
-    NARRATIVE.loadNeatline();
+    TEXT.loadNeatline();
 
-    model1  = NARRATIVE.getNarrativeRecordBySlug('slug-1');
-    model2  = NARRATIVE.getNarrativeRecordBySlug('slug-2');
+    model1 = TEXT.getTextRecordBySlug('slug-1');
+    model2 = TEXT.getTextRecordBySlug('slug-2');
 
-    span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
-    span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
-    span3 = NARRATIVE.find('span[data-neatline-slug="slug-3"]');
+    span1 = TEXT.find('span[data-neatline-slug="slug-1"]');
+    span2 = TEXT.find('span[data-neatline-slug="slug-2"]');
+    span3 = TEXT.find('span[data-neatline-slug="slug-3"]');
 
     vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
@@ -43,7 +43,7 @@ describe('Event Publications', function() {
 
       expect(vent).toHaveBeenCalledWith('highlight', {
         model:  model1,
-        source: Neatline.Narrative.ID
+        source: Neatline.Text.ID
       });
 
     });
@@ -76,7 +76,7 @@ describe('Event Publications', function() {
 
       expect(vent).toHaveBeenCalledWith('unhighlight', {
         model:  model1,
-        source: Neatline.Narrative.ID
+        source: Neatline.Text.ID
       });
 
     });
@@ -109,7 +109,7 @@ describe('Event Publications', function() {
 
       expect(vent).toHaveBeenCalledWith('select', {
         model:  model1,
-        source: Neatline.Narrative.ID
+        source: Neatline.Text.ID
       });
 
     });
@@ -127,7 +127,7 @@ describe('Event Publications', function() {
 
       expect(vent).not.toHaveBeenCalledWith('unselect', {
         model:  model1,
-        source: Neatline.Narrative.ID
+        source: Neatline.Text.ID
       });
 
     });
@@ -155,7 +155,7 @@ describe('Event Publications', function() {
 
       expect(vent).toHaveBeenCalledWith('unselect', {
         model:  model1,
-        source: Neatline.Narrative.ID
+        source: Neatline.Text.ID
       });
 
     });
@@ -174,11 +174,11 @@ describe('Event Publications', function() {
       // ------------------------------------------------------------------
 
       span1.trigger('click');
-      Neatline.Narrative.__view.$el.trigger('click');
+      Neatline.Text.__view.$el.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('unselect', {
         model:  model1,
-        source: Neatline.Narrative.ID
+        source: Neatline.Text.ID
       });
 
     });

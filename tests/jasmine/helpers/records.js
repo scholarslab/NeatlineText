@@ -9,7 +9,7 @@
  */
 
 
-var NARRATIVE = (function(NARRATIVE) {
+var TEXT = (function(TEXT) {
 
 
   /**
@@ -17,22 +17,22 @@ var NARRATIVE = (function(NARRATIVE) {
    *
    * @param {String} slug: A record slug.
    */
-  NARRATIVE.getMapRecordBySlug = function(slug) {
+  TEXT.getMapRecordBySlug = function(slug) {
     return Neatline.Map.__collection.findWhere({ slug: slug });
   };
 
 
   /**
-   * Get a narrative collection model by slug.
+   * Get a text collection model by slug.
    *
    * @param {String} slug: A record slug.
    */
-  NARRATIVE.getNarrativeRecordBySlug = function(slug) {
-    return Neatline.Narrative.__collection.findWhere({ slug: slug });
+  TEXT.getTextRecordBySlug = function(slug) {
+    return Neatline.Text.__collection.findWhere({ slug: slug });
   };
 
 
-  return NARRATIVE;
+  return TEXT;
 
 
-})(NARRATIVE || {});
+})(TEXT || {});

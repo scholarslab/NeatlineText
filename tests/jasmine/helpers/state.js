@@ -9,19 +9,19 @@
  */
 
 
-var NARRATIVE = (function(NARRATIVE) {
+var TEXT = (function(TEXT) {
 
 
   /**
    * Load neatline application.
    */
-  NARRATIVE.loadNeatline = function() {
+  TEXT.loadNeatline = function() {
     loadFixtures('exhibit.html');
     NL.__initNeatline();
   };
 
 
-  return NARRATIVE;
+  return TEXT;
 
 
-})(NARRATIVE || {});
+})(TEXT || {});

@@ -3,16 +3,16 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Narrative', function(
-  Narrative, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Text', function(
+  Text, Neatline, Backbone, Marionette, $, _) {
 
 
-  Narrative.View = Backbone.View.extend({
+  Text.View = Backbone.View.extend({
 
 
     el: '#neatline-narrative',
@@ -190,7 +190,7 @@ Neatline.module('Narrative', function(
      * @return {String}: The target element's slug.
      */
     getModelFromEvent: function(e) {
-      return Narrative.__collection.findWhere({
+      return Text.__collection.findWhere({
         slug: this.getSlugFromEvent(e)
       });
     },
@@ -204,7 +204,7 @@ Neatline.module('Narrative', function(
      */
     publish: function(event, model) {
       Neatline.vent.trigger(event, {
-        source: Narrative.ID, model: model
+        source: Text.ID, model: model
       });
     }
 

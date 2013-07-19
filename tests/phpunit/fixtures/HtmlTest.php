@@ -4,12 +4,12 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_HTML extends NeatlineNarrative_Case_Default
+class FixturesTest_HTML extends NeatlineText_Case_Default
 {
 
 
@@ -27,11 +27,11 @@ class FixturesTest_HTML extends NeatlineNarrative_Case_Default
         $exhibit = $this->_exhibit();
         $exhibit->spatial_layer = "OpenStreetMap";
 
-        $exhibit->narrative = "
+        $exhibit->narrative = <<<HTML
           <span data-neatline-slug='slug-1'>word1</span>
           <span data-neatline-slug='slug-2'>word2</span>
           <span data-neatline-slug='slug-3'>word3</span>
-        ";
+HTML;
 
         $exhibit->save();
         get_view()->neatline_exhibit = $exhibit;

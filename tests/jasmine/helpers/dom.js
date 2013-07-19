@@ -9,7 +9,7 @@
  */
 
 
-var NARRATIVE = (function(NARRATIVE) {
+var TEXT = (function(TEXT) {
 
 
   /**
@@ -17,12 +17,12 @@ var NARRATIVE = (function(NARRATIVE) {
    *
    * @param {String} selector: A CSS selector.
    */
-  NARRATIVE.find = function(selector) {
-    return Neatline.Narrative.__view.$(selector);
+  TEXT.find = function(selector) {
+    return Neatline.Text.__view.$(selector);
   };
 
 
-  return NARRATIVE;
+  return TEXT;
 
 
-})(NARRATIVE || {});
+})(TEXT || {});

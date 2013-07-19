@@ -4,13 +4,13 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 
-class NeatlineNarrative_Case_Default extends Neatline_Case_Abstract
+class NeatlineText_Case_Default extends Neatline_Case_Abstract
 {
 
 
@@ -26,10 +26,10 @@ class NeatlineNarrative_Case_Default extends Neatline_Case_Abstract
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Install Neatline and NeatlineNarrative.
+        // Install Neatline and NeatlineText.
         $pluginHelper = new Omeka_Test_Helper_Plugin;
         $pluginHelper->setUp('Neatline');
-        $pluginHelper->setUp('NeatlineNarrative');
+        $pluginHelper->setUp('NeatlineText');
 
         // Get plugin tables.
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
@@ -45,7 +45,7 @@ class NeatlineNarrative_Case_Default extends Neatline_Case_Abstract
      */
     protected function _getFixturesPath()
     {
-        return NL_NARRATIVE_DIR . '/tests/jasmine/fixtures/';
+        return NL_TEXT_DIR . '/tests/jasmine/fixtures/';
     }
 
 

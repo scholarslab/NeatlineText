@@ -4,18 +4,15 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_JSON extends NeatlineNarrative_Case_Fixture
+class FixturesTest_JSON extends NeatlineText_Case_Fixture
 {
 
 
-    /**
-     * `records.json`
-     */
     public function testRecords()
     {
 

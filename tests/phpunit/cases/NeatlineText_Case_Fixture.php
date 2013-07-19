@@ -4,14 +4,13 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 
-class NeatlineNarrative_Case_Fixture
-    extends NeatlineNarrative_Case_Default
+class NeatlineText_Case_Fixture extends NeatlineText_Case_Default
 {
 
 

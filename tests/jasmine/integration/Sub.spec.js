@@ -3,7 +3,7 @@
 
 /**
  * @package     neatline
- * @subpackage  texts
+ * @subpackage  text
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
@@ -18,14 +18,14 @@ describe('Event Subscriptions', function() {
 
   beforeEach(function() {
 
-    NARRATIVE.loadNeatline();
+    TEXT.loadNeatline();
     NL.respondMap200(fx.records);
 
-    span1 = NARRATIVE.find('span[data-neatline-slug="slug-1"]');
-    span2 = NARRATIVE.find('span[data-neatline-slug="slug-2"]');
+    span1 = TEXT.find('span[data-neatline-slug="slug-1"]');
+    span2 = TEXT.find('span[data-neatline-slug="slug-2"]');
 
-    model1 = NARRATIVE.getMapRecordBySlug('slug-1');
-    model2 = NARRATIVE.getMapRecordBySlug('slug-2');
+    model1 = TEXT.getMapRecordBySlug('slug-1');
+    model2 = TEXT.getMapRecordBySlug('slug-2');
 
   });
 
