@@ -1,0 +1,3 @@
+[data-neatline-slug]{background:#e6e6e6;cursor:pointer;padding:0 5px;}
+[data-neatline-slug].highlighted{background:#ffff80}
+[data-neatline-slug].selected{background:#0080bb;color:#fff}
