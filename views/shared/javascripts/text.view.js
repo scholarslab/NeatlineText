@@ -71,12 +71,15 @@ Neatline.module('Text', function(
      */
     publishSelect: function(e) {
 
+      // Unselect currently-selected model.
       this.publishUnselect();
 
-      // Publish the new selection.
+      // Publish the new model.
       var model = this.getModelFromEvent(e);
       if (model) this.publish('select', model);
 
+      // Block the event from bubbling up to the view container, where it
+      // would trigged `unselect`, effectively negating the selection.
       e.stopPropagation();
 
     },
@@ -120,8 +123,14 @@ Neatline.module('Text', function(
      * @param {Object} model: The record model.
      */
     renderSelect: function(model) {
+
+      // Unselect currently-selected model.
+      this.publishUnselect();
+
+      // Render selection, store model.
       this.getSpansWithSlug(model.get('slug')).addClass('selected');
       this.model = model;
+
     },
 
 

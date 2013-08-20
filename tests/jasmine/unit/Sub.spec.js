@@ -114,6 +114,20 @@ describe('Event Subscriptions', function() {
 
     });
 
+    it('should unselect currently-selected model', function() {
+
+      // ------------------------------------------------------------------
+      // If another model is currently selected, it should be unselected.
+      // ------------------------------------------------------------------
+
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('select', { model: model2 });
+
+      expect(span1).not.toHaveClass('selected');
+      expect(span2).toHaveClass('selected');
+
+    });
+
   });
 
 
