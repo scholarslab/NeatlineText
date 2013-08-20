@@ -16,12 +16,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-symbolic-link');
   grunt.loadNpmTasks('grunt-shell');
 
+  var pkg     = grunt.file.readJSON('./package.json')
   var nlPaths = grunt.file.readJSON('../Neatline/paths.json');
-  var paths = grunt.file.readJSON('./paths.json');
+  var paths   = grunt.file.readJSON('./paths.json');
 
   grunt.initConfig({
 
@@ -66,7 +68,8 @@ module.exports = function(grunt) {
       fixtures: [
         paths.jasmine+'/fixtures/*.json',
         paths.jasmine+'/fixtures/*.html'
-      ]
+      ],
+      pkg: './pkg'
     },
 
     concat: {
@@ -120,8 +123,34 @@ module.exports = function(grunt) {
           paths.payloads.shared.js+'/text-public.js'
         ],
         options: {
-          specs: paths.jasmine+'/integration/**/*.spec.js'
+          specs: paths.jasmine+'/unit/**/*.spec.js'
         }
+      }
+
+    },
+
+    compress: {
+
+      dist: {
+        options: {
+          archive: 'pkg/NeatlineText-'+pkg.version+'.zip'
+        },
+        dest: 'NeatlineText/',
+        src: [
+
+          '**',
+
+          '!.git/**',
+          '!package.json',
+          '!node_modules/**',
+          '!.grunt/**',
+          '!Gruntfile.js',
+          '!paths.json',
+          '!Neatline/**',
+          '!pkg/**',
+          '!tests/**'
+
+        ]
       }
 
     }
@@ -164,6 +193,12 @@ module.exports = function(grunt) {
   grunt.registerTask('jasmine:server', [
     'jasmine:neatline:build',
     'connect'
+  ]);
+
+  // Spawn release package.
+  grunt.registerTask('package', [
+    'clean:pkg',
+    'compress'
   ]);
 
 };
