@@ -21,7 +21,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-symbolic-link');
   grunt.loadNpmTasks('grunt-shell');
 
-  var pkg     = grunt.file.readJSON('./package.json')
+  var pkg     = grunt.file.readJSON('./package.json');
   var nlPaths = grunt.file.readJSON('../Neatline/paths.json');
   var paths   = grunt.file.readJSON('./paths.json');
 
