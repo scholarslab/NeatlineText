@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     neatline
@@ -22,7 +22,7 @@ class FixturesTest_HTML extends NeatlineText_Case_Default
         get_view()->addScriptPath(NL_DIR . '/views/shared');
 
         // EXHIBIT
-        // ----------------------------------------------------------------
+        // --------------------------------------------------------------------
 
         $exhibit = $this->_exhibit();
         $exhibit->spatial_layer = "OpenStreetMap";
@@ -37,7 +37,7 @@ HTML;
         get_view()->neatline_exhibit = $exhibit;
 
         // RECORDS
-        // ----------------------------------------------------------------
+        // --------------------------------------------------------------------
 
         $record1 = $this->_record($exhibit);
         $record2 = $this->_record($exhibit);

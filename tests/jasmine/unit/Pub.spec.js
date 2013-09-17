@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     neatline
@@ -34,10 +34,10 @@ describe('Event Publications', function() {
 
     it('should publish model when one exists', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When the cursor hovers on a tagged element, `highlight` should be
       // published with the corresponding model.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span1.trigger('mouseenter');
 
@@ -50,9 +50,9 @@ describe('Event Publications', function() {
 
     it('should not publish when model does not exist', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When no model exists, `highlight` should not be published.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span3.trigger('mouseenter');
 
@@ -67,10 +67,10 @@ describe('Event Publications', function() {
 
     it('should publish model when one exists', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When the cursor leaves a tagged element, `unhighlight` should be
       // published with the corresponding model.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span1.trigger('mouseleave');
 
@@ -83,9 +83,9 @@ describe('Event Publications', function() {
 
     it('should not publish when model does not exist', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When no model exists, `unhighlight` should not be published.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span3.trigger('mouseenter');
 
@@ -100,10 +100,10 @@ describe('Event Publications', function() {
 
     it('should publish model when one exists', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When the cursor clicks on a tagged element, `select` should be
       // published with the corresponding model.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span1.trigger('click');
 
@@ -114,14 +114,13 @@ describe('Event Publications', function() {
 
     });
 
-    it('should not trigger click-off', function() {
+    it('should not trigger unselect', function() {
 
-      // ------------------------------------------------------------------
-      // When a tagged element is clicked, event propagation should be
-      // manually halted at the level of the span element. Otherwise, the
-      // event would bubble up to the container and trigger the click-off
-      // unselect, which would negate the selection.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a tagged element is clicked, event propagation should be halted
+      // at the level of the span. Otherwise, the event would bubble up to the
+      // container and trigger the click-off unselect.
+      // ----------------------------------------------------------------------
 
       span1.trigger('click');
 
@@ -134,9 +133,9 @@ describe('Event Publications', function() {
 
     it('should not publish when model does not exist', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When no model exists, `select` should not be published.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span3.trigger('click');
 
@@ -146,9 +145,9 @@ describe('Event Publications', function() {
 
     it('should unselect currently-selected model', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // If another model is currently selected, it should be unselected.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       span1.trigger('click');
       span2.trigger('click');
@@ -167,11 +166,10 @@ describe('Event Publications', function() {
 
     it('should unselect on click-off', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor "clicks off" a span selection - when it clicks
-      // anywhere inside the container but _not_ on a tagged element - the
-      // currently-selected model should be unselected.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a span is unselected by a click inside the container but not on
+      // a tagged element, the selected model should be unselected.
+      // ----------------------------------------------------------------------
 
       span1.trigger('click');
       Neatline.Text.__view.$el.trigger('click');

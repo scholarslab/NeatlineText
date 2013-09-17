@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     neatline
@@ -137,9 +137,7 @@ module.exports = function(grunt) {
         },
         dest: 'NeatlineText/',
         src: [
-
           '**',
-
           '!.git/**',
           '!package.json',
           '!node_modules/**',
@@ -149,7 +147,6 @@ module.exports = function(grunt) {
           '!Neatline/**',
           '!pkg/**',
           '!tests/**'
-
         ]
       }
 

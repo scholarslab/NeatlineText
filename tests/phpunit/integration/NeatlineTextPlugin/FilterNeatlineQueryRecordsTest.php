@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     neatline
@@ -15,8 +15,8 @@ class NeatlineTextPluginTest_FilterNeatlineQueryRecords
 
 
     /**
-     * `filterNeatlineQueryRecords` should implement a `hasSlug` parameter
-     * on the records API that matches all records with non-null slugs.
+     * `filterNeatlineQueryRecords` should implement a `hasSlug` parameter on
+     * the records API that matches all records with non-null slugs.
      */
     public function testFilterNeatlineQueryRecords()
     {

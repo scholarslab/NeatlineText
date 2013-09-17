@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     neatline
@@ -34,10 +34,10 @@ describe('Event Subscriptions', function() {
 
     it('should add `highlighted` class', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When `highlight` is triggered, the `highlighted` class should be
       // added to the corresponding element in the text.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('highlight', { model: model1 });
 
@@ -53,10 +53,10 @@ describe('Event Subscriptions', function() {
 
     it('should remove `highlighted` class', function() {
 
-      // ------------------------------------------------------------------
-      // When `unhighlight` is triggered, the `highlighted` class should
-      // be removed to the corresponding element in the text.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When `unhighlight` is triggered, the `highlighted` class should be
+      // removed to the corresponding element in the text.
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('highlight', { model: model1 });
       Neatline.vent.trigger('unhighlight', { model: model1 });
@@ -72,10 +72,10 @@ describe('Event Subscriptions', function() {
 
     it('should add `selected` class', function() {
 
-      // ------------------------------------------------------------------
-      // When `select` is triggered, the `selected` class should be added
-      // to the corresponding elements in the text.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When `select` is triggered, the `selected` class should be added to
+      // the corresponding elements in the text.
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('select', { model: model1 });
 
@@ -86,10 +86,10 @@ describe('Event Subscriptions', function() {
 
     it('should remove `highlighted` class', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // The `highlighted` class should be removed, in case it was added
       // before the record was selected.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('highlight', { model: model1 });
       Neatline.vent.trigger('select', { model: model1 });
@@ -100,10 +100,10 @@ describe('Event Subscriptions', function() {
 
     it('should handle missing spans', function() {
 
-      // ------------------------------------------------------------------
-      // An error should not be thrown if a model is passed that does not
-      // have a corresponding span in the text.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // An error should not be thrown if a model is passed that does not have
+      // a corresponding span in the text.
+      // ----------------------------------------------------------------------
 
       // Create a model that does not have a span.
       var absent = new Neatline.Shared.Record.Model({ id: 999 });
@@ -116,9 +116,9 @@ describe('Event Subscriptions', function() {
 
     it('should unselect currently-selected model', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // If another model is currently selected, it should be unselected.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('select', { model: model1 });
       Neatline.vent.trigger('select', { model: model2 });
@@ -135,10 +135,10 @@ describe('Event Subscriptions', function() {
 
     it('should remove `selected` class', function() {
 
-      // ------------------------------------------------------------------
-      // When `unselect` is triggered, the `selected` class should be
-      // removed from the corresponding element in the text.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When `unselect` is triggered, the `selected` class should be removed
+      // from the corresponding element in the text.
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('select', { model: model1 });
       Neatline.vent.trigger('unselect', { model: model1 });
@@ -149,10 +149,10 @@ describe('Event Subscriptions', function() {
 
     it('should remove `highlighted` class', function() {
 
-      // ------------------------------------------------------------------
-      // The `highlighted` class should also be removed, in case it was
-      // added before the record was selected.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // The `highlighted` class should also be removed, in case it was added
+      // before the record was selected.
+      // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('highlight', { model: model1 });
       Neatline.vent.trigger('unselect', { model: model1 });
