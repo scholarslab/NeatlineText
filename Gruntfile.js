@@ -194,6 +194,7 @@ module.exports = function(grunt) {
 
   // Spawn release package.
   grunt.registerTask('package', [
+    'compile:min',
     'clean:pkg',
     'compress'
   ]);
