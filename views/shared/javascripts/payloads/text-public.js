@@ -311,7 +311,7 @@ Neatline.module('Text', function(
      */
     publish: function(event, model) {
       Neatline.vent.trigger(event, {
-        source: Text.ID, model: model
+        model: model, source: Text.ID
       });
     }
 
