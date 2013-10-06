@@ -63,4 +63,16 @@ Neatline.module('Text', function(
   Neatline.vent.on('unselect', unselect);
 
 
+  /**
+   * Emit the spans corresponding to a model.
+   *
+   * @param {Object} model: The model.
+   * @return {Object}: The DOM element(s).
+   */
+  var getSpans = function(model) {
+    return Text.__view.getSpansWithSlug(model.get('slug'));
+  };
+  Neatline.reqres.setHandler(Text.ID+':getSpans', getSpans);
+
+
 });

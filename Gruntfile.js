@@ -101,7 +101,7 @@ module.exports = function(grunt) {
           '<%= concat.text.src %>',
           paths.stylus.shared+'/**/*.styl'
         ],
-        tasks: ['compile']
+        tasks: 'compile'
       }
     },
 
