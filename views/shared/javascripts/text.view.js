@@ -33,7 +33,7 @@ Neatline.module('Text', function(
     /**
      * Initialize state trackers.
      */
-    initialize: function(model) {
+    initialize: function() {
       this.model = null;
     },
 
@@ -123,14 +123,8 @@ Neatline.module('Text', function(
      * @param {Object} model: The record model.
      */
     renderSelect: function(model) {
-
-      // Unselect currently-selected model.
-      this.publishUnselect();
-
-      // Render selection, store model.
       this.getSpansWithSlug(model.get('slug')).addClass('selected');
       this.model = model;
-
     },
 
 

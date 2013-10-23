@@ -1,1 +1,328 @@
-Neatline.module("Text",function(a,b){a.ID="TEXT",a.addInitializer(function(){a.__collection=new b.Shared.Record.Collection(b.g.text.records),a.__view=new a.View})}),Neatline.module("Text",function(a,b){var c=function(b){a.__view.renderHighlight(b.model)};b.commands.setHandler(a.ID+":highlight",c),b.vent.on("highlight",c);var d=function(b){a.__view.renderUnhighlight(b.model)};b.commands.setHandler(a.ID+":unhighlight",d),b.vent.on("unhighlight",d);var e=function(b){a.__view.renderSelect(b.model),a.__view.scrollTo(b.model),d(b)};b.commands.setHandler(a.ID+":select",e),b.vent.on("select",e);var f=function(b){a.__view.renderUnselect(b.model),d(b)};b.commands.setHandler(a.ID+":unselect",f),b.vent.on("unselect",f);var g=function(b){return a.__view.getSpansWithSlug(b.get("slug"))};b.reqres.setHandler(a.ID+":getSpans",g)}),Neatline.module("Text",function(a,b,c,d,e){a.View=c.View.extend({el:"#neatline-narrative",events:{"mouseenter [data-neatline-slug]":"publishHighlight","mouseleave [data-neatline-slug]":"publishUnhighlight","click [data-neatline-slug]":"publishSelect",click:"publishUnselect"},options:{duration:200,padding:200},initialize:function(){this.model=null},publishHighlight:function(a){var b=this.getModelFromEvent(a);b&&this.publish("highlight",b)},publishUnhighlight:function(a){var b=this.getModelFromEvent(a);b&&this.publish("unhighlight",b)},publishSelect:function(a){this.publishUnselect();var b=this.getModelFromEvent(a);b&&this.publish("select",b),a.stopPropagation()},publishUnselect:function(){this.model&&this.publish("unselect",this.model)},renderHighlight:function(a){this.getSpansWithSlug(a.get("slug")).addClass("highlighted")},renderUnhighlight:function(a){this.getSpansWithSlug(a.get("slug")).removeClass("highlighted")},renderSelect:function(a){this.publishUnselect(),this.getSpansWithSlug(a.get("slug")).addClass("selected"),this.model=a},renderUnselect:function(a){this.getSpansWithSlug(a.get("slug")).removeClass("selected"),this.model=null},scrollTo:function(a){var b=this.getSpansWithSlug(a.get("slug"))[0];b&&this.$el.animate({scrollTop:b.offsetTop-this.options.padding},{duration:this.options.duration})},getSpansWithSlug:function(a){return this.$('[data-neatline-slug="'+a+'"]')},getSlugFromEvent:function(a){return e(a.currentTarget).attr("data-neatline-slug")},getModelFromEvent:function(b){return a.__collection.findWhere({slug:this.getSlugFromEvent(b)})},publish:function(c,d){b.vent.trigger(c,{model:d,source:a.ID})}})});
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     neatline
+ * @subpackage  text
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Text', function(
+  Text, Neatline, Backbone, Marionette, $, _) {
+
+
+  Text.ID = 'TEXT';
+
+
+  Text.addInitializer(function() {
+
+    // Bootstrap text models.
+    Text.__collection = new Neatline.Shared.Record.Collection(
+      Neatline.g.text.records
+    );
+
+    Text.__view = new Text.View();
+
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     neatline
+ * @subpackage  text
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Text', function(
+  Text, Neatline, Backbone, Marionette, $, _) {
+
+
+  /**
+   * Highlight tagged elements.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var highlight = function(args) {
+    Text.__view.renderHighlight(args.model);
+  };
+  Neatline.commands.setHandler(Text.ID+':highlight', highlight);
+  Neatline.vent.on('highlight', highlight);
+
+
+  /**
+   * Unhighlight tagged elements.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var unhighlight = function(args) {
+    Text.__view.renderUnhighlight(args.model);
+  };
+  Neatline.commands.setHandler(Text.ID+':unhighlight', unhighlight);
+  Neatline.vent.on('unhighlight', unhighlight);
+
+
+  /**
+   * Select tagged elements.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var select = function(args) {
+    Text.__view.renderSelect(args.model);
+    Text.__view.scrollTo(args.model);
+    unhighlight(args);
+  };
+  Neatline.commands.setHandler(Text.ID+':select', select);
+  Neatline.vent.on('select', select);
+
+
+  /**
+   * Unselect tagged elements.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var unselect = function(args) {
+    Text.__view.renderUnselect(args.model);
+    unhighlight(args);
+  };
+  Neatline.commands.setHandler(Text.ID+':unselect', unselect);
+  Neatline.vent.on('unselect', unselect);
+
+
+  /**
+   * Emit the spans corresponding to a model.
+   *
+   * @param {Object} model: The model.
+   * @return {Object}: The DOM element(s).
+   */
+  var getSpans = function(model) {
+    return Text.__view.getSpansWithSlug(model.get('slug'));
+  };
+  Neatline.reqres.setHandler(Text.ID+':getSpans', getSpans);
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     neatline
+ * @subpackage  text
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Text', function(
+  Text, Neatline, Backbone, Marionette, $, _) {
+
+
+  Text.View = Backbone.View.extend({
+
+
+    el: '#neatline-narrative',
+
+    events: {
+      'mouseenter [data-neatline-slug]':  'publishHighlight',
+      'mouseleave [data-neatline-slug]':  'publishUnhighlight',
+      'click [data-neatline-slug]':       'publishSelect',
+      'click':                            'publishUnselect'
+    },
+
+    options: {
+      duration: 200,
+      padding: 200
+    },
+
+
+    /**
+     * Initialize state trackers.
+     */
+    initialize: function() {
+      this.model = null;
+    },
+
+
+    // PUBLISHERS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Publish `highlight` when the cursor enters a span.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishHighlight: function(e) {
+      var model = this.getModelFromEvent(e);
+      if (model) this.publish('highlight', model);
+    },
+
+
+    /**
+     * Publish `unhighlight` when the cursor leaves a span.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishUnhighlight: function(e) {
+      var model = this.getModelFromEvent(e);
+      if (model) this.publish('unhighlight', model);
+    },
+
+
+    /**
+     * Publish `select` when a span is clicked.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishSelect: function(e) {
+
+      // Unselect currently-selected model.
+      this.publishUnselect();
+
+      // Publish the new model.
+      var model = this.getModelFromEvent(e);
+      if (model) this.publish('select', model);
+
+      // Block the event from bubbling up to the view container, where it
+      // would trigged `unselect`, effectively negating the selection.
+      e.stopPropagation();
+
+    },
+
+
+    /**
+     * Unselect the currently-selected model.
+     */
+    publishUnselect: function() {
+      if (this.model) this.publish('unselect', this.model);
+    },
+
+
+    // RENDERERS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Add `highlighted` class to tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderHighlight: function(model) {
+      this.getSpansWithSlug(model.get('slug')).addClass('highlighted');
+    },
+
+
+    /**
+     * Remove `highlighted` class from tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderUnhighlight: function(model) {
+      this.getSpansWithSlug(model.get('slug')).removeClass('highlighted');
+    },
+
+
+    /**
+     * Add `selected` class to tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderSelect: function(model) {
+      this.getSpansWithSlug(model.get('slug')).addClass('selected');
+      this.model = model;
+    },
+
+
+    /**
+     * Remove `selected` class from tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderUnselect: function(model) {
+      this.getSpansWithSlug(model.get('slug')).removeClass('selected');
+      this.model = null;
+    },
+
+
+    /**
+     * Scroll to the spans for a model.
+     *
+     * @param {Object} model: The record model.
+     */
+    scrollTo: function(model) {
+
+      // Get the first span tagged with the slug.
+      var span = this.getSpansWithSlug(model.get('slug'))[0];
+      if (!span) return;
+
+      this.$el.animate({
+        scrollTop: span.offsetTop - this.options.padding
+      }, {
+        duration: this.options.duration
+      });
+
+    },
+
+
+    // HELPERS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Query for elements tagged with a slug.
+     *
+     * @param {String} slug: A record slug.
+     * @return {Object}: The DOM selection.
+     */
+    getSpansWithSlug: function(slug) {
+      return this.$('[data-neatline-slug="'+slug+'"]');
+    },
+
+
+    /**
+     * Get the slug associated with a DOM event.
+     *
+     * @param {Object} e: The DOM event.
+     * @return {String}: The target element's slug.
+     */
+    getSlugFromEvent: function(e) {
+      return $(e.currentTarget).attr('data-neatline-slug');
+    },
+
+
+    /**
+     * Try to find a model in the collection that corresponds to a DOM
+     * event triggered from a tagged element.
+     *
+     * @param {Object} e: The DOM event.
+     * @return {String}: The target element's slug.
+     */
+    getModelFromEvent: function(e) {
+      return Text.__collection.findWhere({
+        slug: this.getSlugFromEvent(e)
+      });
+    },
+
+
+    /**
+     * Publish an event with a model.
+     *
+     * @param {String} event: An event name.
+     * @param {Object} model: A record model.
+     */
+    publish: function(event, model) {
+      Neatline.vent.trigger(event, {
+        model: model, source: Text.ID
+      });
+    }
+
+
+  });
+
+
+});
