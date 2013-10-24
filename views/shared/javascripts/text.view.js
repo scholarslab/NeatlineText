@@ -33,7 +33,7 @@ Neatline.module('Text', function(
     /**
      * Initialize state trackers.
      */
-    initialize: function(model) {
+    initialize: function() {
       this.model = null;
     },
 
