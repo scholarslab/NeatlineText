@@ -18,7 +18,7 @@ var TEXT = (function(TEXT) {
    * @param {String} slug: A record slug.
    */
   TEXT.getMapRecordBySlug = function(slug) {
-    return Neatline.Map.__controller.collection.findWhere({
+    return Neatline.Map.__controller.view.records.findWhere({
       slug: slug
     });
   };
@@ -30,7 +30,7 @@ var TEXT = (function(TEXT) {
    * @param {String} slug: A record slug.
    */
   TEXT.getTextRecordBySlug = function(slug) {
-    return Neatline.Text.__controller.view.collection.findWhere({
+    return Neatline.Text.__controller.view.records.findWhere({
       slug: slug
     });
   };

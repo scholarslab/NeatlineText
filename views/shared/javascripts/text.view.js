@@ -40,7 +40,7 @@ Neatline.module('Text', function(Text) {
       this.model = null;
 
       // Mount the bootstrapped collection of models.
-      this.collection = new Neatline.Shared.Record.Collection(
+      this.records = new Neatline.Shared.Record.Collection(
         Neatline.g.text.records
       );
 
@@ -209,7 +209,7 @@ Neatline.module('Text', function(Text) {
      * @return {String}: The target element's slug.
      */
     getModelFromEvent: function(e) {
-      return this.collection.findWhere({ slug: this.getSlugFromEvent(e) });
+      return this.records.findWhere({ slug: this.getSlugFromEvent(e) });
     },
 
 
