@@ -22,16 +22,6 @@ var TEXT = (function(TEXT) {
   };
 
 
-  /**
-   * Get a text collection model by slug.
-   *
-   * @param {String} slug: A record slug.
-   */
-  TEXT.getTextRecordBySlug = function(slug) {
-    return Neatline.Text.__collection.findWhere({ slug: slug });
-  };
-
-
   return TEXT;
 
 

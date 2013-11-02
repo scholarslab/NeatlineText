@@ -18,7 +18,7 @@ var TEXT = (function(TEXT) {
    * @param {String} selector: A CSS selector.
    */
   TEXT.find = function(selector) {
-    return Neatline.Text.__view.$(selector);
+    return Neatline.Text.__controller.view.$(selector);
   };
 
 

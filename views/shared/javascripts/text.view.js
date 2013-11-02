@@ -30,9 +30,12 @@ Neatline.module('Text', function(Text) {
 
 
     /**
-     * Initialize state trackers.
+     * Initialize state.
+     *
+     * @param {Object} options
      */
-    initialize: function() {
+    initialize: function(options) {
+      this.slug = options.slug;
       this.model = null;
     },
 
@@ -155,6 +158,7 @@ Neatline.module('Text', function(Text) {
       var span = this.getSpansWithSlug(model.get('slug'))[0];
       if (!span) return;
 
+      // Scroll to span:
       this.$el.animate({
         scrollTop: span.offsetTop - this.options.padding
       }, {
@@ -198,9 +202,8 @@ Neatline.module('Text', function(Text) {
      * @return {String}: The target element's slug.
      */
     getModelFromEvent: function(e) {
-      return Text.__collection.findWhere({
-        slug: this.getSlugFromEvent(e)
-      });
+      var slug = this.getSlugFromEvent(e);
+      return Neatline.request('TEXT:getModelBySlug', slug);
     },
 
 
@@ -212,7 +215,7 @@ Neatline.module('Text', function(Text) {
      */
     publish: function(event, model) {
       Neatline.vent.trigger(event, {
-        model: model, source: Text.ID
+        model: model, source: this.slug
       });
     }
 

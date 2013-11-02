@@ -18,8 +18,8 @@ describe('Event Publications', function() {
 
     TEXT.loadNeatline();
 
-    model1 = TEXT.getTextRecordBySlug('slug-1');
-    model2 = TEXT.getTextRecordBySlug('slug-2');
+    model1 = Neatline.request('TEXT:getModelBySlug', 'slug-1');
+    model2 = Neatline.request('TEXT:getModelBySlug', 'slug-2');
 
     span1 = TEXT.find('span[data-neatline-slug="slug-1"]');
     span2 = TEXT.find('span[data-neatline-slug="slug-2"]');
@@ -42,8 +42,7 @@ describe('Event Publications', function() {
       span1.trigger('mouseenter');
 
       expect(vent).toHaveBeenCalledWith('highlight', {
-        model:  model1,
-        source: Neatline.Text.ID
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -75,8 +74,7 @@ describe('Event Publications', function() {
       span1.trigger('mouseleave');
 
       expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model:  model1,
-        source: Neatline.Text.ID
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -108,8 +106,7 @@ describe('Event Publications', function() {
       span1.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('select', {
-        model:  model1,
-        source: Neatline.Text.ID
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -125,8 +122,7 @@ describe('Event Publications', function() {
       span1.trigger('click');
 
       expect(vent).not.toHaveBeenCalledWith('unselect', {
-        model:  model1,
-        source: Neatline.Text.ID
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -153,8 +149,7 @@ describe('Event Publications', function() {
       span2.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('unselect', {
-        model:  model1,
-        source: Neatline.Text.ID
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -172,11 +167,10 @@ describe('Event Publications', function() {
       // ----------------------------------------------------------------------
 
       span1.trigger('click');
-      Neatline.Text.__view.$el.trigger('click');
+      Neatline.Text.__controller.view.$el.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('unselect', {
-        model:  model1,
-        source: Neatline.Text.ID
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });

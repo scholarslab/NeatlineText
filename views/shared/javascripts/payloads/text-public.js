@@ -24,8 +24,25 @@ Neatline.module('Text', function(Text) {
     ],
 
     requests: [
-      'getSpans'
+      'getSpansByModel',
+      'getModelBySlug'
     ],
+
+
+    /**
+     * Bootstrap the Create the view.
+     */
+    init: function() {
+
+      // Bootstrap the text models from the template.
+      this.collection = new Neatline.Shared.Record.Collection(
+        Neatline.g.text.records
+      );
+
+      // Start the view, passing in the controller slug.
+      this.view = new Neatline.Text.View({ slug: this.slug });
+
+    },
 
 
     /**
@@ -34,7 +51,7 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
-      Text.__view.renderHighlight(args.model);
+      this.view.renderHighlight(args.model);
     },
 
 
@@ -44,7 +61,7 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     unhighlight: function(args) {
-      Text.__view.renderUnhighlight(args.model);
+      this.view.renderUnhighlight(args.model);
     },
 
 
@@ -54,9 +71,9 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     select: function(args) {
-      Text.__view.renderSelect(args.model);
-      Text.__view.scrollTo(args.model);
-      unhighlight(args);
+      this.view.renderSelect(args.model);
+      this.view.scrollTo(args.model);
+      this.unhighlight(args);
     },
 
 
@@ -66,8 +83,8 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     unselect: function(args) {
-      Text.__view.renderUnselect(args.model);
-      unhighlight(args);
+      this.view.renderUnselect(args.model);
+      this.unhighlight(args);
     },
 
 
@@ -77,8 +94,19 @@ Neatline.module('Text', function(Text) {
      * @param {Object} model: The model.
      * @return {Object}: The DOM element(s).
      */
-    getSpans: function(model) {
-      return Text.__view.getSpansWithSlug(model.get('slug'));
+    getSpansByModel: function(model) {
+      return this.view.getSpansWithSlug(model.get('slug'));
+    },
+
+
+    /**
+     * Emit the record model with a given slug.
+     *
+     * @param {String} slug: The record slug.
+     * @return {Object}: The record.
+     */
+    getModelBySlug: function(slug) {
+      return this.collection.findWhere({ slug: slug });
     }
 
 
@@ -97,11 +125,7 @@ Neatline.module('Text', function(Text) {
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Text', function(
-  Text, Neatline, Backbone, Marionette, $, _) {
-
-
-  Text.ID = 'TEXT';
+Neatline.module('Text', function(Text) {
 
 
   Text.addInitializer(function() {
@@ -111,7 +135,7 @@ Neatline.module('Text', function(
       Neatline.g.text.records
     );
 
-    Text.__view = new Text.View();
+    Text.__controller = new Text.Controller();
 
   });
 
@@ -128,87 +152,7 @@ Neatline.module('Text', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Text', function(
-  Text, Neatline, Backbone, Marionette, $, _) {
-
-
-  /**
-   * Highlight tagged elements.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var highlight = function(args) {
-    Text.__view.renderHighlight(args.model);
-  };
-  Neatline.commands.setHandler(Text.ID+':highlight', highlight);
-  Neatline.vent.on('highlight', highlight);
-
-
-  /**
-   * Unhighlight tagged elements.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unhighlight = function(args) {
-    Text.__view.renderUnhighlight(args.model);
-  };
-  Neatline.commands.setHandler(Text.ID+':unhighlight', unhighlight);
-  Neatline.vent.on('unhighlight', unhighlight);
-
-
-  /**
-   * Select tagged elements.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    Text.__view.renderSelect(args.model);
-    Text.__view.scrollTo(args.model);
-    unhighlight(args);
-  };
-  Neatline.commands.setHandler(Text.ID+':select', select);
-  Neatline.vent.on('select', select);
-
-
-  /**
-   * Unselect tagged elements.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unselect = function(args) {
-    Text.__view.renderUnselect(args.model);
-    unhighlight(args);
-  };
-  Neatline.commands.setHandler(Text.ID+':unselect', unselect);
-  Neatline.vent.on('unselect', unselect);
-
-
-  /**
-   * Emit the spans corresponding to a model.
-   *
-   * @param {Object} model: The model.
-   * @return {Object}: The DOM element(s).
-   */
-  var getSpans = function(model) {
-    return Text.__view.getSpansWithSlug(model.get('slug'));
-  };
-  Neatline.reqres.setHandler(Text.ID+':getSpans', getSpans);
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     neatline
- * @subpackage  text
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Text', function(
-  Text, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Text', function(Text) {
 
 
   Text.View = Backbone.View.extend({
@@ -230,9 +174,12 @@ Neatline.module('Text', function(
 
 
     /**
-     * Initialize state trackers.
+     * Initialize state.
+     *
+     * @param {Object} options
      */
-    initialize: function() {
+    initialize: function(options) {
+      this.slug = options.slug;
       this.model = null;
     },
 
@@ -355,6 +302,7 @@ Neatline.module('Text', function(
       var span = this.getSpansWithSlug(model.get('slug'))[0];
       if (!span) return;
 
+      // Scroll to span:
       this.$el.animate({
         scrollTop: span.offsetTop - this.options.padding
       }, {
@@ -398,9 +346,8 @@ Neatline.module('Text', function(
      * @return {String}: The target element's slug.
      */
     getModelFromEvent: function(e) {
-      return Text.__collection.findWhere({
-        slug: this.getSlugFromEvent(e)
-      });
+      var slug = this.getSlugFromEvent(e);
+      return Neatline.request('TEXT:getModelBySlug', slug);
     },
 
 
@@ -412,7 +359,7 @@ Neatline.module('Text', function(
      */
     publish: function(event, model) {
       Neatline.vent.trigger(event, {
-        model: model, source: Text.ID
+        model: model, source: this.slug
       });
     }
 

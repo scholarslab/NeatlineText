@@ -11,7 +11,7 @@
 describe('Event Subscriptions', function() {
 
 
-  var span1, span2, model1, model2, fx = {
+  var span1, span2, model1, model2, fixtures = {
     records: readFixtures('records.json')
   };
 
@@ -19,7 +19,7 @@ describe('Event Subscriptions', function() {
   beforeEach(function() {
 
     TEXT.loadNeatline();
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     span1 = TEXT.find('span[data-neatline-slug="slug-1"]');
     span2 = TEXT.find('span[data-neatline-slug="slug-2"]');

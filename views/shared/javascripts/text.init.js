@@ -11,9 +11,6 @@
 Neatline.module('Text', function(Text) {
 
 
-  Text.ID = 'TEXT';
-
-
   Text.addInitializer(function() {
 
     // Bootstrap text models.
@@ -21,7 +18,7 @@ Neatline.module('Text', function(Text) {
       Neatline.g.text.records
     );
 
-    Text.__view = new Text.View();
+    Text.__controller = new Text.Controller();
 
   });
 
