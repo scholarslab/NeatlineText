@@ -30,13 +30,20 @@ Neatline.module('Text', function(Text) {
 
 
     /**
-     * Initialize state.
+     * Initialize state, bootstrap the collection.
      *
      * @param {Object} options
      */
     initialize: function(options) {
+
       this.slug = options.slug;
       this.model = null;
+
+      // Mount the bootstrapped collection of models.
+      this.collection = new Neatline.Shared.Record.Collection(
+        Neatline.g.text.records
+      );
+
     },
 
 
@@ -195,15 +202,14 @@ Neatline.module('Text', function(Text) {
 
 
     /**
-     * Try to find a model in the collection that corresponds to a DOM
-     * event triggered from a tagged element.
+     * Try to find a model in the collection that corresponds to a DOM event
+     * triggered from a tagged element.
      *
      * @param {Object} e: The DOM event.
      * @return {String}: The target element's slug.
      */
     getModelFromEvent: function(e) {
-      var slug = this.getSlugFromEvent(e);
-      return Neatline.request('TEXT:getModelBySlug', slug);
+      return this.collection.findWhere({ slug: this.getSlugFromEvent(e) });
     },
 
 
@@ -214,9 +220,7 @@ Neatline.module('Text', function(Text) {
      * @param {Object} model: A record model.
      */
     publish: function(event, model) {
-      Neatline.vent.trigger(event, {
-        model: model, source: this.slug
-      });
+      Neatline.vent.trigger(event, { model: model, source: this.slug });
     }
 
 

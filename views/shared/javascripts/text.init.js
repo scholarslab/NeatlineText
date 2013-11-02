@@ -12,14 +12,7 @@ Neatline.module('Text', function(Text) {
 
 
   Text.addInitializer(function() {
-
-    // Bootstrap text models.
-    Text.__collection = new Neatline.Shared.Record.Collection(
-      Neatline.g.text.records
-    );
-
     Text.__controller = new Text.Controller();
-
   });
 
 

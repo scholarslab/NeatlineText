@@ -18,8 +18,8 @@ describe('Event Publications', function() {
 
     TEXT.loadNeatline();
 
-    model1 = Neatline.request('TEXT:getModelBySlug', 'slug-1');
-    model2 = Neatline.request('TEXT:getModelBySlug', 'slug-2');
+    model1 = TEXT.getTextRecordBySlug('slug-1');
+    model2 = TEXT.getTextRecordBySlug('slug-2');
 
     span1 = TEXT.find('span[data-neatline-slug="slug-1"]');
     span2 = TEXT.find('span[data-neatline-slug="slug-2"]');

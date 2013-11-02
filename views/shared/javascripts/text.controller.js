@@ -24,24 +24,15 @@ Neatline.module('Text', function(Text) {
     ],
 
     requests: [
-      'getSpansByModel',
-      'getModelBySlug'
+      'getSpansByModel'
     ],
 
 
     /**
-     * Bootstrap the Create the view.
+     * Create the view.
      */
     init: function() {
-
-      // Bootstrap the text models from the template.
-      this.collection = new Neatline.Shared.Record.Collection(
-        Neatline.g.text.records
-      );
-
-      // Start the view, passing in the controller slug.
       this.view = new Neatline.Text.View({ slug: this.slug });
-
     },
 
 
@@ -96,17 +87,6 @@ Neatline.module('Text', function(Text) {
      */
     getSpansByModel: function(model) {
       return this.view.getSpansWithSlug(model.get('slug'));
-    },
-
-
-    /**
-     * Emit the record model with a given slug.
-     *
-     * @param {String} slug: The record slug.
-     * @return {Object}: The record.
-     */
-    getModelBySlug: function(slug) {
-      return this.collection.findWhere({ slug: slug });
     }
 
 
