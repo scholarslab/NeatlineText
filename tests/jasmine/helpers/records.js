@@ -18,7 +18,7 @@ var TEXT = (function(TEXT) {
    * @param {String} slug: A record slug.
    */
   TEXT.getMapRecordBySlug = function(slug) {
-    return Neatline.Map.__collection.findWhere({ slug: slug });
+    return Neatline.Map.__controller.collection.findWhere({ slug: slug });
   };
 
 

@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Text', function(
-  Text, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Text', function(Text) {
 
 
   Text.View = Backbone.View.extend({
