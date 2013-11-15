@@ -52,10 +52,14 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterNeatlineQueryRecords($select, $args)
     {
+
+        // Filter out records without slugs.
         if (isset($args['params']['hasSlug'])) {
             $select->where('slug IS NOT NULL');
         }
+
         return $select;
+
     }
 
 
@@ -81,15 +85,21 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineGlobals($globals, $args)
     {
 
-        // Query for narrative models.
-        $result = $this->_db->getTable('NeatlineRecord')->queryRecords(
-            $args['exhibit'], array('hasSlug' => true)
-        );
+        if ($args['exhibit']->hasWidget(self::ID)) {
 
-        // Push collection onto `Neatline.g`.
-        return array_merge($globals, array('text' => array(
-            'records' => $result['records']
-        )));
+            // Query for narrative models.
+            $result = $this->_db->getTable('NeatlineRecord')->queryRecords(
+                array('exhibit_id' => $args['exhibit']->id, 'hasSlug' => true)
+            );
+
+            // Push collection onto `Neatline.g`.
+            $globals = array_merge($globals, array('text' => array(
+                'records' => $result['records']
+            )));
+
+        }
+
+        return $globals;
 
     }
 

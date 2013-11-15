@@ -26,6 +26,7 @@ class FixturesTest_HTML extends NeatlineText_Case_Default
 
         $exhibit = $this->_exhibit();
         $exhibit->spatial_layer = "OpenStreetMap";
+        $exhibit->widgets = "Text";
 
         $exhibit->narrative = <<<HTML
           <span data-neatline-slug='slug-1'>word1</span>

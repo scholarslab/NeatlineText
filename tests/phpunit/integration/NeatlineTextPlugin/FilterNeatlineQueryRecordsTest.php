@@ -31,9 +31,9 @@ class NeatlineTextPluginTest_FilterNeatlineQueryRecords
         $record2->save();
 
         // Query for `hasSlug`.
-        $result = $this->_records->queryRecords($exhibit,
-            array('hasSlug' => true)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id,'hasSlug' => true
+        ));
 
         $this->assertEquals($result['records'][0]['id'], $record1->id);
         $this->assertCount(1, $result['records']);
