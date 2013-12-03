@@ -22,14 +22,8 @@ class NeatlineText_Case_Default extends Neatline_Case_Abstract
 
         parent::setUp();
 
-        // Authenticate and set the current user.
-        $this->user = $this->db->getTable('User')->find(1);
-        $this->_authenticateUser($this->user);
-
-        // Install Neatline and NeatlineText.
-        $pluginHelper = new Omeka_Test_Helper_Plugin;
-        $pluginHelper->setUp('Neatline');
-        $pluginHelper->setUp('NeatlineText');
+        // Install NeatlineText.
+        $this->helper->setUp('NeatlineText');
 
         // Get plugin tables.
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
