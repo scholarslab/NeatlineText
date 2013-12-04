@@ -10,7 +10,7 @@
  */
 
 
-class NeatlineText_Case_Default extends Neatline_Case_Abstract
+class NeatlineText_Case_Default extends Neatline_Case_Default
 {
 
 
@@ -25,17 +25,6 @@ class NeatlineText_Case_Default extends Neatline_Case_Abstract
         // Install NeatlineText.
         $this->helper->setUp('NeatlineText');
 
-    }
-
-
-    /**
-     * Get the Jasmine fixtures directory.
-     *
-     * @return string The directory.
-     */
-    protected function _getFixturesPath()
-    {
-        return NL_TEXT_DIR . '/tests/jasmine/fixtures/';
     }
 
 

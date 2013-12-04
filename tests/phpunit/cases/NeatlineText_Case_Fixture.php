@@ -22,12 +22,19 @@ class NeatlineText_Case_Fixture extends NeatlineText_Case_Default
      */
     public function setUp()
     {
-
         parent::setUp();
-
-        // Create a mock exhibit.
         $this->exhibit = $this->_exhibit();
+    }
 
+
+    /**
+     * Get the Jasmine fixtures directory.
+     *
+     * @return string The directory.
+     */
+    protected function _getFixturesPath()
+    {
+        return NL_TEXT_DIR . '/tests/jasmine/fixtures/';
     }
 
 

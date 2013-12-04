@@ -9,49 +9,41 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_HTML extends NeatlineText_Case_Default
+class FixturesTest_HTML extends NeatlineText_Case_Fixture
 {
-
-
-    protected $_isAdminTest = false;
 
 
     public function testNeatlinePartial()
     {
 
-        get_view()->addScriptPath(NL_DIR . '/views/shared');
-
         // EXHIBIT
         // --------------------------------------------------------------------
 
-        $exhibit = $this->_exhibit();
-        $exhibit->spatial_layer = "OpenStreetMap";
-        $exhibit->widgets = "Text";
-
-        $exhibit->narrative = <<<HTML
+        $this->exhibit->widgets = "Text";
+        $this->exhibit->spatial_layer = "OpenStreetMap";
+        $this->exhibit->narrative = <<<HTML
           <span data-neatline-slug='slug-1'>word1</span>
           <span data-neatline-slug='slug-2'>word2</span>
           <span data-neatline-slug='slug-3'>word3</span>
 HTML;
 
-        $exhibit->save();
-        get_view()->neatline_exhibit = $exhibit;
+        $this->exhibit->save();
+        get_view()->neatline_exhibit = $this->exhibit;
 
         // RECORDS
         // --------------------------------------------------------------------
 
-        $record1 = $this->_record($exhibit);
-        $record2 = $this->_record($exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
         $record1->slug = 'slug-1';
         $record2->slug = 'slug-2';
 
         $record1->save();
         $record2->save();
 
-        $this->_writeFixture(
-            nl_getExhibitMarkup() . nl_getNarrativeMarkup(),
-            'exhibit.html'
-        );
+        // Write the fixture.
+        $template = nl_getExhibitMarkup() . nl_getNarrativeMarkup();
+        $this->_writeFixture($template, 'exhibit.html');
 
     }
 
