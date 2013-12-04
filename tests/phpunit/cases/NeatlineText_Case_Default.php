@@ -15,16 +15,12 @@ class NeatlineText_Case_Default extends Neatline_Case_Default
 
 
     /**
-     * Bootstrap the plugin.
+     * Install Neatline Text.
      */
     public function setUp()
     {
-
         parent::setUp();
-
-        // Install NeatlineText.
         $this->helper->setUp('NeatlineText');
-
     }
 
 
