@@ -25,10 +25,6 @@ class NeatlineText_Case_Default extends Neatline_Case_Abstract
         // Install NeatlineText.
         $this->helper->setUp('NeatlineText');
 
-        // Get plugin tables.
-        $this->_exhibits = $this->db->getTable('NeatlineExhibit');
-        $this->_records  = $this->db->getTable('NeatlineRecord');
-
     }
 
 
