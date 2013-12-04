@@ -25,7 +25,7 @@ class FixturesTest_JSON extends NeatlineText_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'records.json'
         );
 

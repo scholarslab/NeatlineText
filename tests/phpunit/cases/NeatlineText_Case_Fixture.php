@@ -18,20 +18,15 @@ class NeatlineText_Case_Fixture extends NeatlineText_Case_Default
 
 
     /**
-     * Create exhibit, set `exhibit_id` GET parameter.
+     * Create a mock exhibit.
      */
     public function setUp()
     {
 
         parent::setUp();
 
-        // Create mock exhibit.
+        // Create a mock exhibit.
         $this->exhibit = $this->_exhibit();
-
-        // Set `exhibit_id` GET parameter.
-        $this->request->setQuery(array(
-            'exhibit_id' => $this->exhibit->id,
-        ));
 
     }
 
