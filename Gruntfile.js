@@ -105,8 +105,8 @@ module.exports = function(grunt) {
 
       compile: {
         files: {
-          'views/shared/css/payloads/text-public.css':
-            paths.stylus.shared+'/*.styl'
+          src: paths.stylus.shared+'/*.styl',
+          dest: paths.payloads.shared.css+'/text-public.css'
         }
       }
 
