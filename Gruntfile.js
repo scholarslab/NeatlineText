@@ -104,10 +104,8 @@ module.exports = function(grunt) {
     stylus: {
 
       compile: {
-        files: {
-          src: paths.stylus.shared+'/*.styl',
-          dest: paths.payloads.shared.css+'/text-public.css'
-        }
+        src: paths.stylus.shared+'/*.styl',
+        dest: paths.payloads.shared.css+'/text-public.css'
       }
 
     },
@@ -217,6 +215,7 @@ module.exports = function(grunt) {
   // Run all tests.
   grunt.registerTask('test', [
     'clean:fixtures',
+    'compile:min',
     'shell:phpunit',
     'jasmine'
   ]);
