@@ -28,9 +28,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     shell: {
+
       options: {
         stdout: true
       },
+
       phpunit: {
         command: 'phpunit --color',
         options: {
@@ -39,9 +41,11 @@ module.exports = function(grunt) {
           }
         }
       }
+
     },
 
     symlink: {
+
       neatline: {
         link: 'Neatline',
         target: '../Neatline',
@@ -49,53 +53,67 @@ module.exports = function(grunt) {
           overwrite: true
         }
       }
+
     },
 
     connect: {
+
       server: {
         options: {
           keepalive: true,
           port: 1337
         }
       }
+
     },
 
     clean: {
+
       payloads: [
         paths.payloads.shared.js,
         paths.payloads.shared.css
       ],
+
       fixtures: [
         paths.jasmine+'/fixtures/*.json',
         paths.jasmine+'/fixtures/*.html'
       ],
+
       pkg: 'pkg'
+
     },
 
     concat: {
+
       text: {
         src: paths.src.shared+'/*.js',
         dest: paths.payloads.shared.js+'/text-public.js'
       }
+
     },
 
     uglify: {
+
       text: {
         src: '<%= concat.text.src %>',
         dest: paths.payloads.shared.js+'/text-public.js'
       }
+
     },
 
     stylus: {
+
       compile: {
         files: {
           'views/shared/css/payloads/text-public.css':
             paths.stylus.shared+'/*.styl'
         }
       }
+
     },
 
     watch: {
+
       payload: {
         files: [
           '<%= concat.text.src %>',
@@ -103,6 +121,7 @@ module.exports = function(grunt) {
         ],
         tasks: 'compile'
       }
+
     },
 
     jasmine: {
@@ -112,8 +131,8 @@ module.exports = function(grunt) {
         helpers: [
           'Neatline/'+nlPaths.vendor.js.jasmine_jquery,
           'Neatline/'+nlPaths.vendor.js.sinon,
-          'Neatline/'+nlPaths.jasmine+'/helpers/*.js',
           'Neatline/'+nlPaths.jasmine+'/assertions/*.js',
+          'Neatline/'+nlPaths.jasmine+'/helpers/*.js',
           paths.jasmine+'/helpers/*.js'
         ]
       },
@@ -141,14 +160,29 @@ module.exports = function(grunt) {
 
           '**',
 
+          // GIT
           '!.git/**',
+
+          // BOWER
+          '!bower.json',
+          '!bower_components/**',
+
+          // NPM
           '!package.json',
           '!node_modules/**',
+
+          // GRUNT
           '!.grunt/**',
           '!Gruntfile.js',
           '!paths.json',
+
+          // SYMLINK
           '!Neatline/**',
+
+          // DIST
           '!pkg/**',
+
+          // TESTS
           '!tests/**'
 
         ]
