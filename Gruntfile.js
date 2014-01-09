@@ -127,10 +127,7 @@ module.exports = function(grunt) {
       options: {
         template: 'Neatline/'+nlPaths.jasmine+'/runner.tmpl',
         helpers: [
-          'Neatline/'+nlPaths.vendor.js.jasmine_jquery,
-          'Neatline/'+nlPaths.vendor.js.sinon,
-          'Neatline/'+nlPaths.jasmine+'/assertions/*.js',
-          'Neatline/'+nlPaths.jasmine+'/helpers/*.js',
+          'Neatline/'+nlPaths.jasmine+'/payloads/vendor.js',
           paths.jasmine+'/helpers/*.js'
         ]
       },
