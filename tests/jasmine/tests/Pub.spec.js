@@ -25,7 +25,7 @@ describe('Event Publications', function() {
     span2 = TEXT.find('span[data-neatline-slug="slug-2"]');
     span3 = TEXT.find('span[data-neatline-slug="slug-3"]');
 
-    vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    vent = spyOn(Neatline.vent, 'trigger').and.callThrough();
 
   });
 

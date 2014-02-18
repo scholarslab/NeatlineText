@@ -138,7 +138,7 @@ module.exports = function(grunt) {
           paths.payloads.shared.js+'/text-public.js'
         ],
         options: {
-          specs: paths.jasmine+'/unit/**/*.spec.js'
+          specs: paths.jasmine+'/tests/**/*.spec.js'
         }
       }
 
