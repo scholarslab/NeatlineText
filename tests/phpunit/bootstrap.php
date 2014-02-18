@@ -10,11 +10,10 @@
  */
 
 
-// Load Neatline testing bootstrap.
-require_once '../../Neatline/tests/phpunit/bootstrap.php';
+define('NL_TEXT_DIR', dirname(dirname(dirname(__FILE__))));
 
-// Set plugin path.
-define('NL_TEXT_DIR', PLUGIN_DIR.'/NeatlineText');
+// Load Neatline testing bootstrap.
+require_once NL_TEXT_DIR.'/Neatline/tests/phpunit/bootstrap.php';
 
 // Load test cases.
 require_once 'cases/NeatlineText_Case_Default.php';
