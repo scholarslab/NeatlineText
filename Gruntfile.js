@@ -53,8 +53,8 @@ module.exports = function(grunt) {
     clean: {
 
       payloads: [
-        paths.payloads.shared.js,
-        paths.payloads.shared.css
+        paths.payloads.js.shared,
+        paths.payloads.css.shared
       ],
 
       fixtures: [
@@ -69,8 +69,8 @@ module.exports = function(grunt) {
     concat: {
 
       text: {
-        src: paths.src.shared+'/*.js',
-        dest: paths.payloads.shared.js+'/text-public.js'
+        src: paths.src.js.shared+'/*.js',
+        dest: paths.payloads.js.shared+'/text-public.js'
       }
 
     },
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 
       text: {
         src: '<%= concat.text.src %>',
-        dest: paths.payloads.shared.js+'/text-public.js'
+        dest: paths.payloads.js.shared+'/text-public.js'
       }
 
     },
@@ -87,8 +87,8 @@ module.exports = function(grunt) {
     stylus: {
 
       compile: {
-        src: paths.stylus.shared+'/*.styl',
-        dest: paths.payloads.shared.css+'/text-public.css'
+        src: paths.src.styl.shared+'/*.styl',
+        dest: paths.payloads.css.shared+'/text-public.css'
       }
 
     },
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
       payload: {
         files: [
           '<%= concat.text.src %>',
-          paths.stylus.shared+'/**/*.styl'
+          paths.src.styl.shared+'/**/*.styl'
         ],
         tasks: 'compile'
       }
@@ -132,8 +132,8 @@ module.exports = function(grunt) {
 
       neatline: {
         src: [
-          'Neatline/'+nlPaths.payloads.shared.js+'/neatline-public.js',
-          paths.payloads.shared.js+'/text-public.js'
+          'Neatline/'+nlPaths.payloads.js.shared+'/neatline-public.js',
+          paths.payloads.js.shared+'/text-public.js'
         ],
         options: {
           specs: paths.jasmine+'/tests/**/*.spec.js'

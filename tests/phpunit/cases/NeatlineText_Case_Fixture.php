@@ -22,8 +22,15 @@ class NeatlineText_Case_Fixture extends NeatlineText_Case_Default
      */
     public function setUp()
     {
+
         parent::setUp();
+
+        // Register script paths.
+        get_view()->addScriptPath(NL_DIR.'/views/shared');
+
+        // Create a mock exhibit.
         $this->exhibit = $this->_exhibit();
+
     }
 
 
@@ -34,7 +41,7 @@ class NeatlineText_Case_Fixture extends NeatlineText_Case_Default
      */
     protected function _getFixturesPath()
     {
-        return NL_TEXT_DIR . '/tests/jasmine/fixtures/';
+        return NL_TEXT_DIR.'/tests/jasmine/fixtures/';
     }
 
 

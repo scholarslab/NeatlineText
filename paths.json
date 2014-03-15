@@ -1,20 +1,23 @@
 {
 
   "src": {
-    "shared": "./views/shared/javascripts"
-  },
-
-  "stylus": {
-    "shared": "./views/shared/css/stylus"
-  },
-
-  "payloads": {
-    "shared": {
-      "js":   "./views/shared/javascripts/payloads",
-      "css":  "./views/shared/css/payloads"
+    "js": {
+      "shared": "views/shared/javascripts"
+    },
+    "styl": {
+      "shared": "views/shared/css/stylus"
     }
   },
 
-  "jasmine":  "./tests/jasmine"
+  "payloads": {
+    "js": {
+      "shared": "views/shared/javascripts/payloads"
+    },
+    "css": {
+      "shared": "views/shared/css/payloads"
+    }
+  },
+
+  "jasmine":    "tests/jasmine"
 
 }
