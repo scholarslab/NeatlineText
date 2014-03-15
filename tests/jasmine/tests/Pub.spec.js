@@ -11,7 +11,7 @@
 describe('Event Publications', function() {
 
 
-  var model1, model2, span1, span2, span3, vent, slug;
+  var model1, model2, span1, span2, span3, vent;
 
 
   beforeEach(function() {
@@ -26,7 +26,6 @@ describe('Event Publications', function() {
     span3 = TEXT.find('span[data-neatline-slug="slug-3"]');
 
     vent = spyOn(Neatline.vent, 'trigger').and.callThrough();
-    slug = Neatline.Text.__controller.slug;
 
   });
 
@@ -40,11 +39,10 @@ describe('Event Publications', function() {
       // published with the corresponding model.
       // ----------------------------------------------------------------------
 
-      var e = $.Event('mouseenter');
-      span1.trigger(e);
+      span1.trigger('mouseenter');
 
       expect(vent).toHaveBeenCalledWith('highlight', {
-        model: model1, event: e, source: slug
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -73,11 +71,10 @@ describe('Event Publications', function() {
       // published with the corresponding model.
       // ----------------------------------------------------------------------
 
-      var e = $.Event('mouseleave');
-      span1.trigger(e);
+      span1.trigger('mouseleave');
 
       expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model: model1, event: e, source: slug
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -106,11 +103,10 @@ describe('Event Publications', function() {
       // published with the corresponding model.
       // ----------------------------------------------------------------------
 
-      var e = $.Event('click');
-      span1.trigger(e);
+      span1.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('select', {
-        model: model1, event: e, source: slug
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -125,7 +121,9 @@ describe('Event Publications', function() {
 
       span1.trigger('click');
 
-      NL.assertEventNotCalled(vent, 'unselect');
+      expect(vent).not.toHaveBeenCalledWith('unselect', {
+        model: model1, source: Neatline.Text.__controller.slug
+      });
 
     });
 
@@ -137,7 +135,7 @@ describe('Event Publications', function() {
 
       span3.trigger('click');
 
-      expect(vent).not.toHaveBeenCalled();
+      expect(vent).not.toHaveBeenCalledWith();
 
     });
 
@@ -151,7 +149,7 @@ describe('Event Publications', function() {
       span2.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model1, event: undefined, source: slug
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });
@@ -172,7 +170,7 @@ describe('Event Publications', function() {
       Neatline.Text.__controller.view.$el.trigger('click');
 
       expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model1, event: undefined, source: slug
+        model: model1, source: Neatline.Text.__controller.slug
       });
 
     });

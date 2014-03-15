@@ -58,7 +58,7 @@ Neatline.module('Text', function(Text) {
      */
     publishHighlight: function(e) {
       var model = this.getModelFromEvent(e);
-      if (model) this.publish('highlight', model, e);
+      if (model) this.publish('highlight', model);
     },
 
 
@@ -69,7 +69,7 @@ Neatline.module('Text', function(Text) {
      */
     publishUnhighlight: function(e) {
       var model = this.getModelFromEvent(e);
-      if (model) this.publish('unhighlight', model, e);
+      if (model) this.publish('unhighlight', model);
     },
 
 
@@ -85,7 +85,7 @@ Neatline.module('Text', function(Text) {
 
       // Publish the new model.
       var model = this.getModelFromEvent(e);
-      if (model) this.publish('select', model, e);
+      if (model) this.publish('select', model);
 
       // Block the event from bubbling up to the view container, where it
       // would trigged `unselect`, effectively negating the selection.
@@ -216,14 +216,11 @@ Neatline.module('Text', function(Text) {
     /**
      * Publish an event with a model.
      *
-     * @param {String} event: The Neatline event name.
-     * @param {Object} model: The record model.
-     * @param {Object} domEvent: The triggering DOM event.
+     * @param {String} event: An event name.
+     * @param {Object} model: A record model.
      */
-    publish: function(event, model, domEvent) {
-      Neatline.vent.trigger(event, {
-        model: model, event: domEvent, source: this.slug
-      });
+    publish: function(event, model) {
+      Neatline.vent.trigger(event, { model: model, source: this.slug });
     }
 
 
