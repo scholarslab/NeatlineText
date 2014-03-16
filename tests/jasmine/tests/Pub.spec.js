@@ -139,21 +139,6 @@ describe('Event Publications', function() {
 
     });
 
-    it('should unselect currently-selected model', function() {
-
-      // ----------------------------------------------------------------------
-      // If another model is currently selected, it should be unselected.
-      // ----------------------------------------------------------------------
-
-      span1.trigger('click');
-      span2.trigger('click');
-
-      expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model1, source: Neatline.Text.__controller.slug
-      });
-
-    });
-
   });
 
 

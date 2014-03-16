@@ -80,9 +80,6 @@ Neatline.module('Text', function(Text) {
      */
     publishSelect: function(e) {
 
-      // Unselect currently-selected model.
-      this.publishUnselect();
-
       // Publish the new model.
       var model = this.getModelFromEvent(e);
       if (model) this.publish('select', model);
@@ -96,8 +93,10 @@ Neatline.module('Text', function(Text) {
 
     /**
      * Unselect the currently-selected model.
+     *
+     * @param {Object} e: The DOM event.
      */
-    publishUnselect: function() {
+    publishUnselect: function(e) {
       if (this.model) this.publish('unselect', this.model);
     },
 
