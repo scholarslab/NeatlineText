@@ -22,7 +22,7 @@ I see them in <span data-neatline-slug="great-britain">Great Britain</span>, I s
 I see them in <span data-neatline-slug="asia">Asia</span> and in <span data-neatline-slug="africa">Africa</span>.
 ```
 
-In this case we're using `<span>` elements, since we're wrapping inline strings of words, but you can add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc. Once the markup is ready, just paste it into the "Narrative" input in the exhibit's edit form. Be sure to put the text editor in "Source" mode, since we're copying in raw HTML markup:
+In this case we're using `<span>` elements, since we're wrapping inline strings of words, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc. Once the markup is ready, just paste it into the "Narrative" input in the exhibit's edit form. Be sure to put the text editor in "Source" mode, since we're copying in raw HTML markup:
 
 [screenshot]
 
@@ -42,8 +42,9 @@ To make it easy to get up and running, we've built a really simple started theme
 
 ### Neatline themes
 
-The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure] for examples of exhibit-specific themes. 
+The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure]. 
 
 [salut-au-monde]: http://www.bartelby.com/142/74.html
 [neatlight]: https://github.com/scholarslab/neatlight
 [neatlight-mcclure]: https://github.com/davidmcclure/neatlight/tree/master/neatline/exhibits/themes
+[neatline-dclure]: http://neatline.dclure.org
