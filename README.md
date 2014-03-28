@@ -1,6 +1,8 @@
 # NeatlineText
 
-NeatlineText is a extension to the Neatline plugin that makes it possible to connect paragraphs, sentences, and words in text documents with annotations in Neatine exhibits. For example, imagine you're making an interactive edition of Walt Whitman's "[Salut au Monde][salut-au-monde]," and want to wire up the locations in this passage with annotations on the map:
+**NeatlineText** is a extension to the Neatline plugin that makes it possible to connect paragraphs, sentences, and words in text documents with annotations in Neatine exhibits.
+
+For example, imagine you're making an interactive edition of Walt Whitman's "[Salut au Monde][salut-au-monde]," and want to wire up the locations in this passage with annotations on the map:
 
 ```
 I see the tracks of the rail-roads of the earth;	 
@@ -11,13 +13,15 @@ I see them in Asia and in Africa.
 
 ### Step 1: Create the Neatline records
 
-First, create records in the Neatline exhibit for each of the geographic entities that you want to represent on the map - North America, Great Britain, etc. - and fill in the "Slug" field in the "Text" tab with some sort of semantic, easy-to-remember string. Think of the slug as a kind of plain-text `id` for the record, an identifier that's easy to read, remember, and type else where.
+First, create records in the Neatline exhibit for each of the geographic entities that you want to represent on the map - North America, Great Britain, etc. - and fill in the "Slug" field in the "Text" tab with some sort of semantic, easy-to-remember string:
 
 [screenshot]
 
+Think of the slug as a plain-text, human-readable identifier that can be used to reference the record in other contexts. Like, for instance, attributes in HTML markup! Which brings us to...
+
 ### Step 2: Create the HTML fragment
 
-Then, fire up your favorite text editor, and just wrap the corresponding sections of the text in elements with `data-neatline-slug` attributes that point at the record slugs:
+Fire up your favorite text editor, copy in the text document, and wrap sections of the text with elements with `data-neatline-slug` attributes that point at the record slugs:
 
 ```html
 I see the tracks of the rail-roads of the earth;	 
@@ -26,7 +30,7 @@ I see them in <span data-neatline-slug="great-britain">Great Britain</span>, I s
 I see them in <span data-neatline-slug="asia">Asia</span> and in <span data-neatline-slug="africa">Africa</span>.
 ```
 
-In this case we're using `<span>` elements, since we're wrapping inline strings of words, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc.
+In this case we're using `<span>` elements, since we're wrapping little inline strings, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc. The plugin doesn't care - it just queries for the existence of the attribute, not the element type.
 
 ### Step 3: Copy the HTML into the exhibit
 
