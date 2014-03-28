@@ -28,7 +28,7 @@ I see them in <span data-neatline-slug="asia">Asia</span> and in <span data-neat
 
 In this case we're using `<span>` elements, since we're wrapping inline strings of words, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc.
 
-### Step 3: Paste the HTML into the exhibit
+### Step 3: Copy the HTML into the exhibit
 
 Once the markup is ready, just paste it into the "Narrative" input in the exhibit's edit form. Be sure to put the text editor in "Source" mode, since we're copying in raw HTML markup:
 
@@ -44,13 +44,11 @@ And that's it - now, when you open up the exhibit, NeatlineText will automatical
 
 Unlike other Neatline extensions like Waypoints and SIMILE, NeatlineText needs to be used in conjunction with a theme that positions the text next to the exhibit inside of a scrollable container element. By default, most themes just display the exhibit narrative above or below the exhibit, which means that the user would need to manually scroll up and down on the page to compare the exhibit with the text, which defeats the purpose.
 
-### Omeka themes
+There are two ways to go about this:
 
-To make it easy to get up and running, we've built a really simple started theme called [Neatlight][neatlight], which is specifically designed to house NeatlineText exhibits. Think of Neatlight as the Neatline equivalent of the default "Thanks Roy" theme that ships with Omeka - it's a simple, no-frills foundation that can be easily adapted and expanded.
+  - **Omeka themes**: To make it easy to get up and running, we've built a really simple started theme called [Neatlight][neatlight], which is specifically designed to house NeatlineText exhibits. Think of Neatlight as the Neatline equivalent of the default "Thanks Roy" theme that ships with Omeka - it's a simple, no-frills foundation that can be easily adapted and expanded.
 
-### Neatline themes
-
-The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure]. 
+  - **Neatline themes**: The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure]. 
 
 [salut-au-monde]: http://www.bartelby.com/142/74.html
 [neatlight]: https://github.com/scholarslab/neatlight
