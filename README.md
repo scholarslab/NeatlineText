@@ -9,9 +9,13 @@ I see them in Great Britain, I see them in Europe;
 I see them in Asia and in Africa.
 ```
 
+### Step 1: Create the Neatline records
+
 First, create records in the Neatline exhibit for each of the geographic entities that you want to represent on the map - North America, Great Britain, etc. - and fill in the "Slug" field in the "Text" tab with some sort of semantic, easy-to-remember string. Think of the slug as a kind of plain-text `id` for the record, an identifier that's easy to read, remember, and type else where.
 
 [screenshot]
+
+### Step 2: Create the HTML fragment
 
 Then, fire up your favorite text editor, and just wrap the corresponding sections of the text in elements with `data-neatline-slug` attributes that point at the record slugs:
 
@@ -22,7 +26,11 @@ I see them in <span data-neatline-slug="great-britain">Great Britain</span>, I s
 I see them in <span data-neatline-slug="asia">Asia</span> and in <span data-neatline-slug="africa">Africa</span>.
 ```
 
-In this case we're using `<span>` elements, since we're wrapping inline strings of words, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc. Once the markup is ready, just paste it into the "Narrative" input in the exhibit's edit form. Be sure to put the text editor in "Source" mode, since we're copying in raw HTML markup:
+In this case we're using `<span>` elements, since we're wrapping inline strings of words, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc.
+
+### Step 3: Paste the HTML into the exhibit
+
+Once the markup is ready, just paste it into the "Narrative" input in the exhibit's edit form. Be sure to put the text editor in "Source" mode, since we're copying in raw HTML markup:
 
 [screenshot]
 
