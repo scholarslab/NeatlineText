@@ -2,10 +2,12 @@
 
 NeatlineText is a extension to the Neatline plugin that makes it possible to connect paragraphs, sentences, and words in text documents with annotations in Neatine exhibits. The text documents are prepared as HTML fragmets - prepared in a regular text editor - that wrap sections of the text in elements that have `data-neatline-slug` attributes, each pointing to a "slug" on a record in the Neatline exhibit. For example, imagine you're making an interactive edition of Walt Whitman's "Salut au Monde," and want to wire up the locations in this passage with annotations on the map:
 
+```
 I see the tracks of the rail-roads of the earth;	 
 I see them welding State to State, city to city, through **North America**;
 I see them in **Great Britain**, I see them in **Europe**;	 
 I see them in **Asia** and in **Africa**.
+```
 
 First, create records in the Neatline exhibit for each of the geographic entities, and fill in the "Slug" field in the "Text" tab with some sort of semantic, easy-to-remember string. Think of the slug as a kind of plain-text `id` for the record, an identifier that's easy to read, remember, and type else where.
 
