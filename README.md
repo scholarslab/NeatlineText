@@ -5,11 +5,26 @@
 For example, imagine you're making an interactive edition of Walt Whitman's "[Salut au Monde][salut-au-monde]," and want to wire up the locations in this passage with annotations on the map:
 
 ```
-I see the tracks of the rail-roads of the earth;	 
+I see the tracks of the rail-roads of the earth;
 I see them welding State to State, city to city, through North America;
-I see them in Great Britain, I see them in Europe;	 
+I see them in Great Britain, I see them in Europe;
 I see them in Asia and in Africa.
 ```
+
+## Installation
+
+  1. Download the latest version of the plugin from the Omeka add-ons repository.
+
+  1. Uncompress the `.zip` archive.
+
+  1. Move the `NeatlineText` into the `/plugins` folder in you Omeka installation.
+
+  1. In the Omeka administrative interface, click on **Plugins** in the top navigation bar and find the listing for "Neatline Widget ~ Text". Click on "Install."
+
+  **Note**: Since NeatlineText is a "sub-plugin" that extends the core functionality of Neatline (itself a plugin), Neatline needs to be installed in order to install NeatlineText.
+
+
+## Usage
 
 ### Step 1: Create the Neatline records
 
@@ -24,9 +39,9 @@ Think of the slug as a plain-text, human-readable identifier that can be used to
 Fire up your favorite text editor, copy in the text document, and wrap sections of the text with elements with `data-neatline-slug` attributes that point at the record slugs:
 
 ```html
-I see the tracks of the rail-roads of the earth;	 
+I see the tracks of the rail-roads of the earth;
 I see them welding State to State, city to city, through <span data-neatline-slug="north-america">North America</span>;
-I see them in <span data-neatline-slug="great-britain">Great Britain</span>, I see them in <span data-neatline-slug="europe">Europe</span>;	 
+I see them in <span data-neatline-slug="great-britain">Great Britain</span>, I see them in <span data-neatline-slug="europe">Europe</span>;
 I see them in <span data-neatline-slug="asia">Asia</span> and in <span data-neatline-slug="africa">Africa</span>.
 ```
 
