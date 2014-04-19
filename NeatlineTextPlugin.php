@@ -37,8 +37,8 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookNeatlinePublicStatic($args)
     {
         if ($args['exhibit']->hasWidget(self::ID)) {
-            queue_css_file('dist/text-public');
-            queue_js_file('dist/text-public');
+            queue_css_file('payloads/text-public');
+            queue_js_file('payloads/text-public');
         }
     }
 
