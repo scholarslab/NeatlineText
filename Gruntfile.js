@@ -10,16 +10,7 @@
 
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-phpunit');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-symbolic-link');
+  require('load-grunt-tasks')(grunt);
 
   var pkg     = grunt.file.readJSON('package.json');
   var nlPaths = grunt.file.readJSON('../Neatline/paths.json');
