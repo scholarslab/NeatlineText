@@ -9,12 +9,12 @@
     }
   },
 
-  "dist": {
+  "payloads": {
     "js": {
-      "shared": "views/shared/javascripts/dist"
+      "shared": "views/shared/javascripts/payloads"
     },
     "css": {
-      "shared": "views/shared/css/dist"
+      "shared": "views/shared/css/payloads"
     }
   },
 
