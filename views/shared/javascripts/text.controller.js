@@ -60,9 +60,16 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     select: function(args) {
+
+      // Render the selection.
       this.view.renderSelect(args.model);
-      this.view.scrollTo(args.model);
       this.unhighlight(args);
+
+      // Scroll to the elements (unless the text was clicked).
+      if (args.source != 'TEXT') {
+        this.view.scrollTo(args.model);
+      }
+
     },
 
 
