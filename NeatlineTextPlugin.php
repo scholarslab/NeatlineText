@@ -85,7 +85,7 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
 
         if ($args['exhibit']->hasWidget(self::ID)) {
 
-            // Query for narrative models.
+            // Query for records with slugs.
             $result = $this->_db->getTable('NeatlineRecord')->queryRecords(
                 array('exhibit_id' => $args['exhibit']->id, 'hasSlug' => true)
             );
