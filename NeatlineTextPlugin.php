@@ -87,7 +87,7 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
 
         // Bootstrap records if the widget is activated for the exhibit and
         // spatial querying is enabled (if not, we can just use the colleciton
-        // loaded by the map, which will have everything.
+        // loaded by the map, which will include all records).
 
         if ($exhibit->hasWidget(self::ID) && $exhibit->spatial_querying) {
 
