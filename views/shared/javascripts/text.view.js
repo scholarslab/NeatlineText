@@ -37,10 +37,20 @@ Neatline.module('Text', function(Text) {
       this.slug = options.slug;
       this.model = null;
 
-      // Mount the bootstrapped collection of models.
-      this.records = new Neatline.Shared.Record.Collection(
-        Neatline.g.text.records
-      );
+      // If spatial querying is enabled, use the collection bootstrapped by
+      // the Text plugin, which includes all records with slugs.
+
+      if (Neatline.g.neatline.exhibit.spatial_querying) {
+        this.records = new Neatline.Shared.Record.Collection(
+          Neatline.g.text.records
+        );
+      }
+
+      // Otherwise, use the map collection, which will include everything.
+
+      else {
+        this.records = Neatline.request('MAP:getRecords');
+      }
 
     },
 

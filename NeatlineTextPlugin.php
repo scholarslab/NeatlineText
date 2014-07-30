@@ -83,11 +83,17 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineGlobals($globals, $args)
     {
 
-        if ($args['exhibit']->hasWidget(self::ID)) {
+        $exhibit = $args['exhibit'];
+
+        // Bootstrap records if the widget is activated for the exhibit and
+        // spatial querying is enabled (if not, we can just use the colleciton
+        // loaded by the map, which will have everything.
+
+        if ($exhibit->hasWidget(self::ID) && $exhibit->spatial_querying) {
 
             // Query for records with slugs.
             $result = $this->_db->getTable('NeatlineRecord')->queryRecords(
-                array('exhibit_id' => $args['exhibit']->id, 'hasSlug' => true)
+                array('exhibit_id' => $exhibit->id, 'hasSlug' => true)
             );
 
             // Push collection onto `Neatline.g`.
