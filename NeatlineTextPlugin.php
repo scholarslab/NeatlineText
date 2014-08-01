@@ -21,7 +21,6 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
 
 
     protected $_filters = array(
-        'neatline_query_records',
         'neatline_exhibit_widgets',
         'neatline_globals'
     );
@@ -38,26 +37,6 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
             queue_css_file('dist/text-public');
             queue_js_file('dist/text-public');
         }
-    }
-
-
-    /**
-     * Add `hasSlug` parameter to records API.
-     *
-     * @param Omeka_Db_Select $select The original select.
-     * @param array $args Includes `params`, the API query parameters.
-     * @return Omeka_Db_Select The modified select.
-     */
-    public function filterNeatlineQueryRecords($select, $args)
-    {
-
-        // Filter out records without slugs.
-        if (isset($args['params']['hasSlug'])) {
-            $select->where('slug IS NOT NULL');
-        }
-
-        return $select;
-
     }
 
 
