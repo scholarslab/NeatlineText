@@ -28,9 +28,14 @@ Neatline.module('Text', function(Text) {
 
     /**
      * Create the view.
+     *
+     * @param {Object} records: The record collection.
      */
-    init: function() {
-      this.view = new Neatline.Text.View({ slug: this.slug });
+    init: function(records) {
+      this.view = new Neatline.Text.View({
+        slug: this.slug,
+        records: records
+      });
     },
 
 

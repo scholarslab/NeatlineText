@@ -33,25 +33,9 @@ Neatline.module('Text', function(Text) {
      * @param {Object} options
      */
     initialize: function(options) {
-
-      this.slug = options.slug;
-      this.model = null;
-
-      // If spatial querying is enabled, use the collection bootstrapped by
-      // the Text plugin, which includes all records with slugs.
-
-      if (Neatline.g.neatline.exhibit.spatial_querying) {
-        this.records = new Neatline.Shared.Record.Collection(
-          Neatline.g.text.records
-        );
-      }
-
-      // Otherwise, use the map collection, which will include everything.
-
-      else {
-        this.records = Neatline.request('MAP:getRecords');
-      }
-
+      this.slug     = options.slug;
+      this.records  = options.records;
+      this.model    = null;
     },
 
 
