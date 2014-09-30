@@ -18,7 +18,8 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
 
 
     protected $_hooks = array(
-        'neatline_public_static'
+        'neatline_public_static',
+        'neatline_public_templates'
     );
 
 
@@ -41,6 +42,22 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
             queue_js_file('payloads/text-public');
         }
     }
+
+    /**
+     * If Neatline Text is enabled and Neatline is in fullscreen, calls the narrative.
+     *
+     * @param array $args Array of arguments, with `exhibit`.
+     */
+    public function hookNeatlinePublicTemplates($args)
+    {
+        if ($args['exhibit']->hasWidget(self::ID)) {
+            $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+            if ($action == "fullscreen" ) {
+                echo nl_getNarrativeMarkup();
+            }
+        }
+    }
+
 
 
     /**
