@@ -132,7 +132,7 @@ module.exports = function(grunt) {
 
       neatline: {
         src: [
-          'Neatline/'+nlPaths.payloads.js.shared+'/neatline-public.js',
+          'Neatline/'+nlPaths.dist.js.shared+'/neatline-public.js',
           paths.payloads.js.shared+'/text-public.js'
         ],
         options: {

@@ -20,3 +20,29 @@
   &.selected
     background #0080bb
     color white
+
+body.neatline.fullscreen
+  background darken(white, 0.5%)
+
+  div.exhibit
+    float left
+    width 65%
+
+    #neatline, #neatline-map
+      height 100%
+      width 100%
+
+  div.narrative
+    float right
+    overflow-y scroll
+    padding 2em 3em
+    width 35%
+
+    a.back
+      display inline-block
+      font-family $font-body
+      padding 5px 8px
+      margin-bottom 1em
+
+      .arrow
+        font-size 13px
