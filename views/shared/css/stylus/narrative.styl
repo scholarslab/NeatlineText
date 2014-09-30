@@ -21,6 +21,8 @@
     background #0080bb
     color white
 
+// Styles for layout for show action
+
 body.neatline.show
   background darken(white, 0.5%)
 
@@ -34,6 +36,7 @@ body.neatline.show
 
   div#neatline-narrative
     float right
+    height 800px
     overflow-y scroll
     padding 2em 3em
     width 35%
@@ -46,3 +49,33 @@ body.neatline.show
 
       .arrow
         font-size 13px
+
+// Styles for layout for fullscreen action
+
+body.neatline.fullscreen
+  background darken(white, 0.5%)
+
+  div#neatline-map
+    float left
+    width 65%
+
+    #neatline, #neatline-map
+      height 100%
+      width 100%
+
+  div#neatline-narrative
+    float right
+    height 800px
+    overflow-y scroll
+    padding 2em 3em
+    width 35%
+
+    a.back
+      display inline-block
+      font-family $font-body
+      padding 5px 8px
+      margin-bottom 1em
+
+      .arrow
+        font-size 13px
+

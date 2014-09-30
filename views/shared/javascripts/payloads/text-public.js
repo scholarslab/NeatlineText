@@ -1,1 +1,349 @@
-Neatline.module("Text",function(a){a.Controller=Neatline.Shared.Controller.extend({slug:"TEXT",events:["highlight","unhighlight","select","unselect"],requests:["getSpansByModel"],init:function(){this.view=new Neatline.Text.View({slug:this.slug})},highlight:function(a){this.view.renderHighlight(a.model)},unhighlight:function(a){this.view.renderUnhighlight(a.model)},select:function(a){this.view.renderSelect(a.model),this.view.scrollTo(a.model),this.unhighlight(a)},unselect:function(a){this.view.renderUnselect(a.model),this.unhighlight(a)},getSpansByModel:function(a){return this.view.getSpansWithSlug(a.get("slug"))}})}),Neatline.module("Text",function(a){a.addInitializer(function(){a.__controller=new a.Controller})}),Neatline.module("Text",function(a){a.View=Backbone.View.extend({el:"#neatline-narrative",events:{"mouseenter [data-neatline-slug]":"publishHighlight","mouseleave [data-neatline-slug]":"publishUnhighlight","click [data-neatline-slug]":"publishSelect",click:"publishUnselect"},options:{duration:200,padding:200},initialize:function(a){this.slug=a.slug,this.model=null,this.records=new Neatline.Shared.Record.Collection(Neatline.g.text.records)},publishHighlight:function(a){var b=this.getModelFromEvent(a);b&&this.publish("highlight",b,a)},publishUnhighlight:function(a){var b=this.getModelFromEvent(a);b&&this.publish("unhighlight",b,a)},publishSelect:function(a){var b=this.getModelFromEvent(a);b&&this.publish("select",b,a),a.stopPropagation()},publishUnselect:function(a){this.model&&this.publish("unselect",this.model,a)},renderHighlight:function(a){this.getSpansWithSlug(a.get("slug")).addClass("highlighted")},renderUnhighlight:function(a){this.getSpansWithSlug(a.get("slug")).removeClass("highlighted")},renderSelect:function(a){this.publishUnselect(),this.getSpansWithSlug(a.get("slug")).addClass("selected"),this.model=a},renderUnselect:function(a){this.getSpansWithSlug(a.get("slug")).removeClass("selected"),this.model=null},scrollTo:function(a){var b=this.getSpansWithSlug(a.get("slug"))[0];b&&this.$el.animate({scrollTop:b.offsetTop-this.options.padding},{duration:this.options.duration})},getSpansWithSlug:function(a){return this.$('[data-neatline-slug="'+a+'"]')},getSlugFromEvent:function(a){return $(a.currentTarget).attr("data-neatline-slug")},getModelFromEvent:function(a){return this.records.findWhere({slug:this.getSlugFromEvent(a)})},publish:function(a,b,c){Neatline.vent.trigger(a,{model:b,event:c,source:this.slug})}})});
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     neatline
+ * @subpackage  text
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Text', function(Text) {
+
+
+  Text.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'TEXT',
+
+    events: [
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect'
+    ],
+
+    requests: [
+      'getSpansByModel'
+    ],
+
+
+    /**
+     * Create the view.
+     */
+    init: function() {
+      this.view = new Neatline.Text.View({ slug: this.slug });
+    },
+
+
+    /**
+     * Highlight tagged elements.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    highlight: function(args) {
+      this.view.renderHighlight(args.model);
+    },
+
+
+    /**
+     * Unhighlight tagged elements.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    unhighlight: function(args) {
+      this.view.renderUnhighlight(args.model);
+    },
+
+
+    /**
+     * Select tagged elements.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    select: function(args) {
+      this.view.renderSelect(args.model);
+      this.view.scrollTo(args.model);
+      this.unhighlight(args);
+    },
+
+
+    /**
+     * Unselect tagged elements.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    unselect: function(args) {
+      this.view.renderUnselect(args.model);
+      this.unhighlight(args);
+    },
+
+
+    /**
+     * Emit the spans corresponding to a model.
+     *
+     * @param {Object} model: The model.
+     * @return {Object}: The DOM element(s).
+     */
+    getSpansByModel: function(model) {
+      return this.view.getSpansWithSlug(model.get('slug'));
+    }
+
+
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     neatline
+ * @subpackage  text
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Text', function(Text) {
+
+
+  Text.addInitializer(function() {
+    Text.__controller = new Text.Controller();
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     neatline
+ * @subpackage  text
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Text', function(Text) {
+
+
+  Text.View = Backbone.View.extend({
+
+
+    el: '#neatline-narrative',
+
+    events: {
+      'mouseenter [data-neatline-slug]':  'publishHighlight',
+      'mouseleave [data-neatline-slug]':  'publishUnhighlight',
+      'click [data-neatline-slug]':       'publishSelect',
+      'click':                            'publishUnselect'
+    },
+
+    options: {
+      duration: 200,
+      padding: 200
+    },
+
+
+    /**
+     * Initialize state, bootstrap the collection.
+     *
+     * @param {Object} options
+     */
+    initialize: function(options) {
+
+      this.slug = options.slug;
+      this.model = null;
+
+      // Mount the bootstrapped collection of models.
+      this.records = new Neatline.Shared.Record.Collection(
+        Neatline.g.text.records
+      );
+
+    },
+
+
+    // PUBLISHERS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Publish `highlight` when the cursor enters a span.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishHighlight: function(e) {
+      var model = this.getModelFromEvent(e);
+      if (model) this.publish('highlight', model, e);
+    },
+
+
+    /**
+     * Publish `unhighlight` when the cursor leaves a span.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishUnhighlight: function(e) {
+      var model = this.getModelFromEvent(e);
+      if (model) this.publish('unhighlight', model, e);
+    },
+
+
+    /**
+     * Publish `select` when a span is clicked.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishSelect: function(e) {
+
+      // Publish the new model.
+      var model = this.getModelFromEvent(e);
+      if (model) this.publish('select', model, e);
+
+      // Block the event from bubbling up to the view container, where it
+      // would trigged `unselect`, effectively negating the selection.
+      e.stopPropagation();
+
+    },
+
+
+    /**
+     * Unselect the currently-selected model.
+     *
+     * @param {Object} e: The DOM event.
+     */
+    publishUnselect: function(e) {
+      if (this.model) this.publish('unselect', this.model, e);
+    },
+
+
+    // RENDERERS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Add `highlighted` class to tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderHighlight: function(model) {
+      this.getSpansWithSlug(model.get('slug')).addClass('highlighted');
+    },
+
+
+    /**
+     * Remove `highlighted` class from tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderUnhighlight: function(model) {
+      this.getSpansWithSlug(model.get('slug')).removeClass('highlighted');
+    },
+
+
+    /**
+     * Add `selected` class to tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderSelect: function(model) {
+
+      // Unselect currently-selected model.
+      this.publishUnselect();
+
+      // Render selection, store model.
+      this.getSpansWithSlug(model.get('slug')).addClass('selected');
+      this.model = model;
+
+    },
+
+
+    /**
+     * Remove `selected` class from tagged spans.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderUnselect: function(model) {
+      this.getSpansWithSlug(model.get('slug')).removeClass('selected');
+      this.model = null;
+    },
+
+
+    /**
+     * Scroll to the spans for a model.
+     *
+     * @param {Object} model: The record model.
+     */
+    scrollTo: function(model) {
+
+      // Get the first span tagged with the slug.
+      var span = this.getSpansWithSlug(model.get('slug'))[0];
+      if (!span) return;
+
+      // Scroll to span:
+      this.$el.animate({
+        scrollTop: span.offsetTop - this.options.padding
+      }, {
+        duration: this.options.duration
+      });
+
+    },
+
+
+    // HELPERS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Query for elements tagged with a slug.
+     *
+     * @param {String} slug: A record slug.
+     * @return {Object}: The DOM selection.
+     */
+    getSpansWithSlug: function(slug) {
+      return this.$('[data-neatline-slug="'+slug+'"]');
+    },
+
+
+    /**
+     * Get the slug associated with a DOM event.
+     *
+     * @param {Object} e: The DOM event.
+     * @return {String}: The target element's slug.
+     */
+    getSlugFromEvent: function(e) {
+      return $(e.currentTarget).attr('data-neatline-slug');
+    },
+
+
+    /**
+     * Try to find a model in the collection that corresponds to a DOM event
+     * triggered from a tagged element.
+     *
+     * @param {Object} e: The DOM event.
+     * @return {String}: The target element's slug.
+     */
+    getModelFromEvent: function(e) {
+      return this.records.findWhere({ slug: this.getSlugFromEvent(e) });
+    },
+
+
+    /**
+     * Publish an event with a model.
+     *
+     * @param {String} event: The Neatline event name.
+     * @param {Object} model: The record model.
+     * @param {Object} domEvent: The triggering DOM event.
+     */
+    publish: function(event, model, domEvent) {
+      Neatline.vent.trigger(event, {
+        model: model, event: domEvent, source: this.slug
+      });
+    }
+
+
+  });
+
+
+});
