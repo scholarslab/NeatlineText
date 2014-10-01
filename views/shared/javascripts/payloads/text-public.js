@@ -156,6 +156,9 @@ Neatline.module('Text', function(Text) {
       this.slug = options.slug;
       this.model = null;
 
+      var narrative = $('#neatline-narrative');
+      narrative.css('height', $(window).height()).css('overflow-y', 'scroll');
+
       // Mount the bootstrapped collection of models.
       this.records = new Neatline.Shared.Record.Collection(
         Neatline.g.text.records

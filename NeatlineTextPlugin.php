@@ -44,7 +44,7 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
     }
 
     /**
-     * If Neatline Text is enabled and Neatline is in fullscreen, calls the narrative.
+     * If Neatline Text is enabled and Neatline is in fullscreen, gets the narrative markup.
      *
      * @param array $args Array of arguments, with `exhibit`.
      */
@@ -57,7 +57,6 @@ class NeatlineTextPlugin extends Omeka_Plugin_AbstractPlugin
             }
         }
     }
-
 
 
     /**
