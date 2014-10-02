@@ -18,6 +18,7 @@ Neatline.module('Text', function(Text) {
       'mouseenter [data-neatline-slug]':  'publishHighlight',
       'mouseleave [data-neatline-slug]':  'publishUnhighlight',
       'click [data-neatline-slug]':       'publishSelect',
+      'touchstart [data-neatline-slug]':  'publishSelect',
       'click':                            'publishUnselect'
     },
 
