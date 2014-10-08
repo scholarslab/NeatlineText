@@ -9,6 +9,8 @@
  */
 
 describe('Event Subscriptions', function() {
+  jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures/';
+
 
 
   var span1, span2, model1, model2, fixtures = {
