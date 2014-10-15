@@ -10,7 +10,6 @@
 
 Neatline.module('Text', function(Text) {
 
-
   Text.View = Backbone.View.extend({
 
 
@@ -28,7 +27,6 @@ Neatline.module('Text', function(Text) {
       padding: 200
     },
 
-
     /**
      * Initialize state, bootstrap the collection.
      *
@@ -38,9 +36,13 @@ Neatline.module('Text', function(Text) {
 
       this.slug = options.slug;
       this.model = null;
+      var _this = this;
 
-      var narrative = $('#neatline-narrative');
-      narrative.css('height', $(window).height()).css('overflow-y', 'scroll');
+      $(this.el).css('height', $(window).height()).css('overflow-y', 'scroll');
+
+      $(window).resize(function() {
+        _this.resizeNarrative();
+      });
 
       // Mount the bootstrapped collection of models.
       this.records = new Neatline.Shared.Record.Collection(
@@ -179,6 +181,12 @@ Neatline.module('Text', function(Text) {
 
     // HELPERS
     // ------------------------------------------------------------------------
+
+
+    // Resize the height of the narrative on window resize
+    resizeNarrative: function() {
+          $(this.el).css('height', $(window).height());
+    },
 
 
     /**
