@@ -36,13 +36,6 @@ Neatline.module('Text', function(Text) {
 
       this.slug = options.slug;
       this.model = null;
-      var _this = this;
-
-      $(this.el).css('height', $(window).height()).css('overflow-y', 'scroll');
-
-      $(window).resize(function() {
-        _this.resizeNarrative();
-      });
 
       // Mount the bootstrapped collection of models.
       this.records = new Neatline.Shared.Record.Collection(
@@ -181,12 +174,6 @@ Neatline.module('Text', function(Text) {
 
     // HELPERS
     // ------------------------------------------------------------------------
-
-
-    // Resize the height of the narrative on window resize
-    resizeNarrative: function() {
-          $(this.el).css('height', $(window).height());
-    },
 
 
     /**
