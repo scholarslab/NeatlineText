@@ -1,10 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
 /**
  * @package     neatline
  * @subpackage  text
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -30,9 +28,14 @@ Neatline.module('Text', function(Text) {
 
     /**
      * Create the view.
+     *
+     * @param {Object} records: The record collection.
      */
-    init: function() {
-      this.view = new Neatline.Text.View({ slug: this.slug });
+    init: function(records) {
+      this.view = new Neatline.Text.View({
+        slug: this.slug,
+        records: records
+      });
     },
 
 
@@ -62,9 +65,16 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     select: function(args) {
+
+      // Render the selection.
       this.view.renderSelect(args.model);
-      this.view.scrollTo(args.model);
       this.unhighlight(args);
+
+      // Scroll to the elements (unless the text was clicked).
+      if (args.source != 'TEXT') {
+        this.view.scrollTo(args.model);
+      }
+
     },
 
 

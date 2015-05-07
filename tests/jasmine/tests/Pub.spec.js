@@ -1,10 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
 /**
  * @package     neatline
  * @subpackage  text
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -100,48 +98,55 @@ describe('Event Publications', function() {
 
   describe('select', function() {
 
-    it('should publish model when one exists', function() {
+    _.each(['click', 'touchstart'], function(event) {
 
-      // ----------------------------------------------------------------------
-      // When the cursor clicks on a tagged element, `select` should be
-      // published with the corresponding model.
-      // ----------------------------------------------------------------------
+      describe(event, function() {
 
-      var e = $.Event('click');
-      span1.trigger(e);
+        it('should publish model when one exists', function() {
 
-      expect(vent).toHaveBeenCalledWith('select', {
-        model: model1, event: e, source: slug
+          // ------------------------------------------------------------------
+          // When a tagged element is clicked / tapped, `select` should be
+          // published with the corresponding model.
+          // ------------------------------------------------------------------
+
+          var e = $.Event(event);
+          span1.trigger(e);
+
+          expect(vent).toHaveBeenCalledWith('select', {
+            model: model1, event: e, source: slug
+          });
+
+        });
+
+        it('should not trigger unselect', function() {
+
+          // ------------------------------------------------------------------
+          // When a tagged element is pressed, event propagation should stop
+          // at the level of the span. Otherwise, the event would bubble up to
+          // the container and trigger the click-off unselect.
+          // ------------------------------------------------------------------
+
+          var e = $.Event(event);
+          span1.trigger(e);
+
+          expect(vent).not.toHaveBeenCalledWith('unselect', {
+            model: model1, event: e, source: slug
+          });
+
+        });
+
+        it('should not publish when model does not exist', function() {
+
+          // ------------------------------------------------------------------
+          // When no model exists, `select` should not be published.
+          // ------------------------------------------------------------------
+
+          span3.trigger(event);
+          expect(vent).not.toHaveBeenCalledWith();
+
+        });
+
       });
-
-    });
-
-    it('should not trigger unselect', function() {
-
-      // ----------------------------------------------------------------------
-      // When a tagged element is clicked, event propagation should be halted
-      // at the level of the span. Otherwise, the event would bubble up to the
-      // container and trigger the click-off unselect.
-      // ----------------------------------------------------------------------
-
-      var e = $.Event('click');
-      span1.trigger(e);
-
-      expect(vent).not.toHaveBeenCalledWith('unselect', {
-        model: model1, event: e, source: slug
-      });
-
-    });
-
-    it('should not publish when model does not exist', function() {
-
-      // ----------------------------------------------------------------------
-      // When no model exists, `select` should not be published.
-      // ----------------------------------------------------------------------
-
-      span3.trigger('click');
-
-      expect(vent).not.toHaveBeenCalledWith();
 
     });
 

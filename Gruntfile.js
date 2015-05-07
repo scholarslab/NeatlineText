@@ -1,25 +1,14 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
 /**
  * @package     neatline
  * @subpackage  text
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-phpunit');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-symbolic-link');
+  require('load-grunt-tasks')(grunt);
 
   var pkg     = grunt.file.readJSON('package.json');
   var nlPaths = grunt.file.readJSON('../Neatline/paths.json');
@@ -52,9 +41,9 @@ module.exports = function(grunt) {
 
     clean: {
 
-      payloads: [
-        paths.payloads.js.shared,
-        paths.payloads.css.shared
+      dist: [
+        paths.dist.js.shared,
+        paths.dist.css.shared
       ],
 
       fixtures: [
@@ -70,7 +59,7 @@ module.exports = function(grunt) {
 
       text: {
         src: paths.src.js.shared+'/*.js',
-        dest: paths.payloads.js.shared+'/text-public.js'
+        dest: paths.dist.js.shared+'/text-public.js'
       }
 
     },
@@ -79,7 +68,7 @@ module.exports = function(grunt) {
 
       text: {
         src: '<%= concat.text.src %>',
-        dest: paths.payloads.js.shared+'/text-public.js'
+        dest: paths.dist.js.shared+'/text-public.js'
       }
 
     },
@@ -88,7 +77,7 @@ module.exports = function(grunt) {
 
       compile: {
         src: paths.src.styl.shared+'/*.styl',
-        dest: paths.payloads.css.shared+'/text-public.css'
+        dest: paths.dist.css.shared+'/text-public.css'
       }
 
     },
@@ -125,7 +114,7 @@ module.exports = function(grunt) {
       options: {
         template: 'Neatline/'+nlPaths.jasmine+'/runner.tmpl',
         helpers: [
-          'Neatline/'+nlPaths.jasmine+'/payloads/vendor.js',
+          'Neatline/'+nlPaths.jasmine+'/dist/vendor.js',
           paths.jasmine+'/helpers/*.js'
         ],
         vendor: [
@@ -137,7 +126,7 @@ module.exports = function(grunt) {
       neatline: {
         src: [
           'Neatline/'+nlPaths.dist.js.shared+'/neatline-public.js',
-          paths.payloads.js.shared+'/text-public.js'
+          paths.dist.js.shared+'/text-public.js'
         ],
         options: {
           specs: paths.jasmine+'/tests/**/*.spec.js'
