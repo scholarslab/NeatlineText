@@ -53,7 +53,7 @@ Once the markup is ready, just paste it into the "Narrative" input in the exhibi
 
 ![Narrative](http://dclure.org/wp-content/uploads/2014/03/narrative.jpg)
 
-And that's it. Now, when you open up the exhibit, NeatlineText will automatically wire up bi-directional connections between the spans in the text document and the corresponding records in Neatline. Out of the box, the plugin implements two basic interactions:
+And that's it. Now, when you open up the public or fullscreen views of the exhibit, NeatlineText will automatically wire up bi-directional connections between the spans in the text document and the corresponding records in Neatline. Out of the box, the plugin implements two basic interactions:
 
   - **Highlighting**: When the user hovers the cursor over a span in the text, any corresponding objects in the Neatline exhibit (shapes on the map, waypoints, etc.) will be highlighted. And vice versa - when the cursor hovers on an object in the exhibit, the span(s) in the text will highlight.
 
@@ -67,7 +67,7 @@ There are two ways to go about this:
 
   - **Omeka themes**: To make it easy to get up and running, we've built a really simple started theme called [Neatlight][neatlight], which is specifically designed to house NeatlineText exhibits. Think of Neatlight as the Neatline equivalent of the default "Thanks Roy" theme that ships with Omeka - it's a simple, no-frills foundation that can be easily adapted and expanded.
 
-  - **Neatline themes**: The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure]. 
+  - **Neatline themes**: The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure].
 
 [plugin]: http://omeka.org/add-ons/plugins/neatlinetext
 [salut-au-monde]: http://www.bartelby.com/142/74.html
