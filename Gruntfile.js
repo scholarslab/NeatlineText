@@ -150,7 +150,9 @@ module.exports = function(grunt) {
           '!.git/**',
 
           // COMPOSER
+          '!composer.*',
           '!vendor/**',
+          'composer.json',
 
           // BOWER
           '!bower.json',

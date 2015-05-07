@@ -31,7 +31,7 @@ Once all of that is in place, we're ready to go.
   - Minifies the static payloads and copies them into the distribution directories.
   - Generates a `.zip` archive under the `pkg` directory.
 
-- `git flow release stop $VERSION`
+- `git flow release finish $VERSION`
 
 - Hallway test the zip.
 
