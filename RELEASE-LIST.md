@@ -17,15 +17,21 @@ Once all of that is in place, we're ready to go.
 
 ## Create a new release
 
+- `VERSION=1.1.0`
+
+- `git flow release start $VERSION`
+
 - Bump the `version` in the `package.json` and `plugin.ini` files to the new
   version.
+
+- Run `grunt`. This generates the dist files and runs tests.
 
 - Run `grunt package`. Behind the scenes, this task:
 
   - Minifies the static payloads and copies them into the distribution directories.
   - Generates a `.zip` archive under the `pkg` directory.
-  - Commits the changes.
-  - Tags the release.
+
+- `git flow release stop $VERSION`
 
 - Hallway test the zip.
 
