@@ -160,6 +160,9 @@ module.exports = function(grunt) {
           // GIT
           '!.git/**',
 
+          // COMPOSER
+          '!vendor/**',
+
           // BOWER
           '!bower.json',
           '!bower_components/**',

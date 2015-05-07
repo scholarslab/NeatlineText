@@ -20,7 +20,7 @@ Once all of that is in place, we're ready to go.
 - Bump the `version` in the `package.json` and `plugin.ini` files to the new
   version.
 
-- Run `grunt release`. Behind the scenes, this task:
+- Run `grunt package`. Behind the scenes, this task:
 
   - Minifies the static payloads and copies them into the distribution directories.
   - Generates a `.zip` archive under the `pkg` directory.
