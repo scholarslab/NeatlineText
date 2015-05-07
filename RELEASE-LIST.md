@@ -20,6 +20,8 @@ Once all of that is in place, we're ready to go.
 - Bump the `version` in the `package.json` and `plugin.ini` files to the new
   version.
 
+- Run `grunt`. This generates the dist files and runs tests.
+
 - Run `grunt package`. Behind the scenes, this task:
 
   - Minifies the static payloads and copies them into the distribution directories.
