@@ -8,7 +8,6 @@
 
 Neatline.module('Text', function(Text) {
 
-
   Text.View = Backbone.View.extend({
 
 
@@ -26,7 +25,6 @@ Neatline.module('Text', function(Text) {
       duration: 200,
       padding: 200
     },
-
 
     /**
      * Initialize state, bootstrap the collection.

@@ -116,6 +116,10 @@ module.exports = function(grunt) {
         helpers: [
           'Neatline/'+nlPaths.jasmine+'/dist/vendor.js',
           paths.jasmine+'/helpers/*.js'
+        ],
+        vendor: [
+          "node_modules/jasmine-jquery/lib/jasmine-jquery.js",
+          "Neatline/tests/jasmine/dist/vendor.js"
         ]
       },
 
@@ -144,6 +148,9 @@ module.exports = function(grunt) {
 
           // GIT
           '!.git/**',
+
+          // COMPOSER
+          '!vendor/**',
 
           // BOWER
           '!bower.json',

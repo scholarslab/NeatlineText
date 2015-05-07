@@ -45,7 +45,7 @@ Neatline.module('Text', function(Text) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
-      this.view.renderHighlight(args.model);
+       this.view.renderHighlight(args.model);
     },
 
 

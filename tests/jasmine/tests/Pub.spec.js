@@ -7,6 +7,7 @@
  */
 
 describe('Event Publications', function() {
+  jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures/';
 
 
   var model1, model2, span1, span2, span3, vent, slug;
